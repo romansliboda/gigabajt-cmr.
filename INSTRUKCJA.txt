@@ -1,10 +1,11 @@
-Gigabajt CMR PWA - wersja testowa.
+Gigabajt CMR v1.1 — aktualizacja istniejącego repozytorium
 
-To jest zestaw plików gotowy do umieszczenia na hostingu HTTPS, np. GitHub Pages.
-Nie jest to APK, a plik ZIP nie jest instalatorem Androida.
+1. Rozpakuj ZIP w telefonie.
+2. Otwórz repozytorium na GitHubie > Add file > Upload files.
+3. Wybierz z folderu GigabajtCMR_v1_1 pięć plików: index.html, sw.js, manifest.webmanifest, icon-192.png, icon-512.png.
+4. Kliknij Commit changes. Gdy GitHub pyta o nadpisanie plików o tych samych nazwach, zatwierdź.
+5. Otwórz stronę i odśwież ją. Czasem trzeba zamknąć kartę i otworzyć ponownie.
 
-Po opublikowaniu otwórz adres HTTPS w Chrome na telefonie i wybierz menu (trzy kropki) -> Dodaj do ekranu głównego / Zainstaluj aplikację.
-Po pierwszym wczytaniu plików i zarejestrowaniu service workera aplikacja może działać bez internetu.
-Historia dokumentów pozostaje na urządzeniu. Eksportuj kopię z zakładki Historia.
-
-UWAGA: wydruk CMR to uproszczona wersja testowa; nie jest zweryfikowanym formularzem do rzeczywistego transportu.
+Nowe: klasyczny podgląd czterech egzemplarzy CMR, automatyczne uzupełnianie podglądu, zmiana powiększenia.
+Historia CMR pozostaje w lokalnej pamięci tej samej przeglądarki/domeny. Przed aktualizacją zaleca się eksport kopii z zakładki Historia.
+UWAGA: wzór demonstracyjny — wymaga weryfikacji poprawności rubryk i układu przed użyciem jako dokument przewozowy.
