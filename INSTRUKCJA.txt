@@ -1,0 +1,10 @@
+Gigabajt CMR PWA - wersja testowa.
+
+To jest zestaw plików gotowy do umieszczenia na hostingu HTTPS, np. GitHub Pages.
+Nie jest to APK, a plik ZIP nie jest instalatorem Androida.
+
+Po opublikowaniu otwórz adres HTTPS w Chrome na telefonie i wybierz menu (trzy kropki) -> Dodaj do ekranu głównego / Zainstaluj aplikację.
+Po pierwszym wczytaniu plików i zarejestrowaniu service workera aplikacja może działać bez internetu.
+Historia dokumentów pozostaje na urządzeniu. Eksportuj kopię z zakładki Historia.
+
+UWAGA: wydruk CMR to uproszczona wersja testowa; nie jest zweryfikowanym formularzem do rzeczywistego transportu.
