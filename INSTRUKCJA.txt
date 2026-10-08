@@ -1,1 +1,1 @@
-Gigabajt CMR 1.2. Wgraj pliki z folderu do głównego katalogu istniejącego repozytorium. Nie wgrywaj ZIP. Po publikacji odśwież stronę. Przed rzeczywistym przewozem sprawdź wydruk z formularzem używanym przez przewoźnika. Dane i kopie historii przechowuj bezpiecznie.
+Gigabajt CMR 1.4: Rozpakuj archiwum i wgraj 7 plików do katalogu głównego repozytorium GitHub. Nowy druk to cmr-template-vector.svg (ostry wektor, offline). Szablon jest odtworzony na podstawie standardowych wzorów CMR; wymaga testowego wydruku przed użyciem zawodowym.

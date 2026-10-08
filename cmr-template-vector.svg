@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 585 895" width="585" height="895">
+<rect width="585" height="895" fill="#fff"/>
+<g stroke="#d31c4c" stroke-width="1.1" fill="none">
+<rect x="1" y="18" width="583" height="866"/>
+<path d="M1 94L310 94"/>
+<path d="M1 177L310 177"/>
+<path d="M1 229L310 229"/>
+<path d="M1 280L310 280"/>
+<path d="M1 333L310 333"/>
+<path d="M310 94L584 94"/>
+<path d="M310 177L584 177"/>
+<path d="M310 229L584 229"/>
+<path d="M310 333L584 333"/>
+<path d="M310 18L310 333"/>
+<path d="M1 333L584 333"/>
+<path d="M1 596L584 596"/>
+<path d="M1 627L584 627"/>
+<path d="M112 333L112 627"/>
+<path d="M175 333L175 627"/>
+<path d="M233 333L233 627"/>
+<path d="M349 333L349 627"/>
+<path d="M420 333L420 627"/>
+<path d="M503 333L503 627"/>
+<path d="M1 596L584 596"/>
+<path d="M69 596L69 627"/>
+<path d="M132 596L132 627"/>
+<path d="M196 596L196 627"/>
+<path d="M278 596L278 627"/>
+<path d="M310 627L310 810"/>
+<path d="M1 680L310 680"/>
+<path d="M1 771L310 771"/>
+<path d="M1 810L584 810"/>
+<path d="M1 884L584 884"/>
+<path d="M310 675L584 675"/>
+<path d="M310 771L584 771"/>
+<path d="M385 675L385 771"/>
+<path d="M466 675L466 771"/>
+<path d="M522 675L522 771"/>
+<path d="M310 695L584 695"/>
+<path d="M310 708L584 708"/>
+<path d="M310 721L584 721"/>
+<path d="M310 734L584 734"/>
+<path d="M310 747L584 747"/>
+<path d="M310 760L584 760"/>
+<path d="M310 810L310 884"/>
+<path d="M1 800L310 800"/>
+<path d="M199 810L199 884"/>
+<path d="M392 810L392 884"/>
+</g>
+<g fill="#cb1644" font-family="Arial,Helvetica,sans-serif">
+<text x="3" y="5" font-size="7">1  Egzemplarz dla nadawcy</text>
+<text x="3" y="12" font-size="7">    Exemplar für den Absender</text>
+<text x="3" y="19" font-size="7">    Copy for sender</text>
+<text x="315" y="28" font-size="6.3">MIĘDZYNARODOWY SAMOCHODOWY LIST PRZEWOZOWY</text>
+<text x="315" y="36" font-size="6.3">INTERNATIONALER FRACHTBRIEF</text>
+<text x="315" y="44" font-size="6.3">INTERNATIONAL CONSIGNMENT NOTE</text>
+<rect x="453" y="34" width="50" height="22" rx="8" fill="none" stroke="#cb1644" stroke-width="2"/>
+<text x="461" y="50" font-size="15" font-weight="bold">CMR</text>
+<text x="315" y="67" font-size="5.5">Niniejszy przewóz podlega postanowieniom konwencji CMR</text>
+<text x="315" y="74" font-size="5.5">Carriage subject to the provisions of the CMR Convention.</text>
+<text x="5" y="33" font-size="12" font-weight="bold">1</text>
+<text x="22" y="31" font-size="6.1">Nadawca (nazwa, adres, kraj)</text>
+<text x="22" y="38" font-size="6.1">Absender (Name, Anschrift, Land)</text>
+<text x="22" y="45" font-size="6.1">Sender (name, address, country)</text>
+<text x="5" y="108" font-size="12" font-weight="bold">2</text>
+<text x="22" y="106" font-size="6.1">Odbiorca (nazwa, adres, kraj)</text>
+<text x="22" y="113" font-size="6.1">Empfänger (Name, Anschrift, Land)</text>
+<text x="22" y="120" font-size="6.1">Consignee (name, address, country)</text>
+<text x="5" y="190" font-size="12" font-weight="bold">3</text>
+<text x="22" y="188" font-size="6.1">Miejsce przeznaczenia (miejscowość, kraj)</text>
+<text x="22" y="195" font-size="6.1">Auslieferungsort des Gutes</text>
+<text x="22" y="202" font-size="6.1">Place of delivery of the goods</text>
+<text x="5" y="242" font-size="12" font-weight="bold">4</text>
+<text x="22" y="240" font-size="6.1">Miejsce i data załadowania (kraj, data)</text>
+<text x="22" y="247" font-size="6.1">Ort und Tag der Übernahme des Gutes</text>
+<text x="22" y="254" font-size="6.1">Place and date of taking over the goods</text>
+<text x="5" y="293" font-size="12" font-weight="bold">5</text>
+<text x="22" y="291" font-size="6.1">Załączone dokumenty</text>
+<text x="22" y="298" font-size="6.1">Beigefügte Dokumente</text>
+<text x="22" y="305" font-size="6.1">Documents attached</text>
+<text x="315" y="108" font-size="12" font-weight="bold">16</text>
+<text x="332" y="106" font-size="6.1">Przewoźnik (nazwa, adres, kraj)</text>
+<text x="332" y="113" font-size="6.1">Frachtführer (Name, Anschrift, Land)</text>
+<text x="332" y="120" font-size="6.1">Carrier (name, address, country)</text>
+<text x="330" y="142" font-size="10" font-weight="bold">NR REJ.:</text>
+<text x="315" y="190" font-size="12" font-weight="bold">17</text>
+<text x="332" y="188" font-size="6.1">Kolejni przewoźnicy</text>
+<text x="332" y="195" font-size="6.1">Nachfolgende Frachtführer</text>
+<text x="332" y="202" font-size="6.1">Successive carriers</text>
+<text x="315" y="242" font-size="12" font-weight="bold">18</text>
+<text x="332" y="240" font-size="6.1">Zastrzeżenia i uwagi przewoźnika</text>
+<text x="332" y="247" font-size="6.1">Vorbehalte und Bemerkungen des Frachtführers</text>
+<text x="332" y="254" font-size="6.1">Carrier’s reservations and observations</text>
+<text x="5" y="346" font-size="11" font-weight="bold">6</text>
+<text x="22" y="346" font-size="5.5">Cechy i numery</text>
+<text x="22" y="353" font-size="5.2">Marks and Nos.</text>
+<text x="115" y="346" font-size="11" font-weight="bold">7</text>
+<text x="132" y="346" font-size="5.5">Ilość sztuk</text>
+<text x="132" y="353" font-size="5.2">No. of packages</text>
+<text x="178" y="346" font-size="11" font-weight="bold">8</text>
+<text x="195" y="346" font-size="5.5">Rodzaj opakowań</text>
+<text x="195" y="353" font-size="5.2">Method of packing</text>
+<text x="236" y="346" font-size="11" font-weight="bold">9</text>
+<text x="253" y="346" font-size="5.5">Rodzaj towaru</text>
+<text x="253" y="353" font-size="5.2">Nature of the goods</text>
+<text x="352" y="346" font-size="11" font-weight="bold">10</text>
+<text x="371" y="346" font-size="5.5">Numer statystyczny</text>
+<text x="371" y="353" font-size="5.2">Statistical number</text>
+<text x="423" y="346" font-size="11" font-weight="bold">11</text>
+<text x="442" y="346" font-size="5.5">Waga brutto w kg</text>
+<text x="442" y="353" font-size="5.2">Gross weight in kg</text>
+<text x="505" y="346" font-size="11" font-weight="bold">12</text>
+<text x="524" y="346" font-size="5.5">Objętość w m³</text>
+<text x="524" y="353" font-size="5.2">Volume in m³</text>
+<text x="5" y="608" font-size="5.8">Numer UN</text>
+<text x="5" y="616" font-size="5.8">UN number</text>
+<text x="74" y="608" font-size="5.8">Paczki / pakiet</text>
+<text x="74" y="616" font-size="5.8">Packages</text>
+<text x="136" y="608" font-size="5.8">Klasa</text>
+<text x="136" y="616" font-size="5.8">Class</text>
+<text x="200" y="608" font-size="5.8">Grupa pakowania</text>
+<text x="200" y="616" font-size="5.8">Packing group</text>
+<text x="284" y="608" font-size="5.8">ADR</text>
+<text x="284" y="616" font-size="5.8">ADR</text>
+<text x="5" y="641" font-size="12" font-weight="bold">13</text>
+<text x="22" y="639" font-size="6.1">Instrukcje nadawcy</text>
+<text x="22" y="646" font-size="6.1">Anweisungen des Absenders</text>
+<text x="22" y="653" font-size="6.1">Sender’s instructions</text>
+<text x="5" y="785" font-size="12" font-weight="bold">14</text>
+<text x="22" y="783" font-size="6.1">Postanowienia odnośnie przewoźnego</text>
+<text x="22" y="790" font-size="6.1">Frachtzahlungsanweisungen</text>
+<text x="22" y="797" font-size="6.1">Instructions as to payment for carriage</text>
+<text x="315" y="641" font-size="12" font-weight="bold">19</text>
+<text x="332" y="639" font-size="6.1">Postanowienia specjalne</text>
+<text x="332" y="646" font-size="6.1">Besondere Vereinbarungen</text>
+<text x="332" y="653" font-size="6.1">Special agreements</text>
+<text x="315" y="689" font-size="12" font-weight="bold">20</text>
+<text x="332" y="687" font-size="6.1">Do zapłacenia przez</text>
+<text x="332" y="694" font-size="6.1">Zu zahlen von</text>
+<text x="332" y="701" font-size="6.1">To be paid by</text>
+<text x="390" y="689" font-size="5.5">Nadawca / Sender</text>
+<text x="468" y="689" font-size="5.5">Waluta</text>
+<text x="526" y="689" font-size="5.5">Odbiorca</text>
+<text x="315" y="706" font-size="5.3">Przewoźne / Carriage charges</text>
+<text x="315" y="719" font-size="5.3">Bonifikaty / Reductions</text>
+<text x="315" y="732" font-size="5.3">Saldo / Balance</text>
+<text x="315" y="745" font-size="5.3">Dodatkowe koszty / Additional costs</text>
+<text x="315" y="758" font-size="5.3">Razem / Total</text>
+<text x="5" y="807" font-size="6">21   Wystawiono w / dnia  ·  Established in / on</text>
+<text x="315" y="784" font-size="12" font-weight="bold">15</text>
+<text x="332" y="782" font-size="6.1">Zapłata / zwrot kosztów</text>
+<text x="332" y="789" font-size="6.1">Frachtzahlungsanweisungen</text>
+<text x="332" y="796" font-size="6.1">Carriage charges</text>
+<text x="5" y="825" font-size="12" font-weight="bold">22</text>
+<text x="27" y="823" font-size="6">Podpis / stempel nadawcy</text>
+<text x="27" y="831" font-size="6">Signature and stamp of sender</text>
+<text x="203" y="825" font-size="12" font-weight="bold">23</text>
+<text x="225" y="823" font-size="6">Podpis / stempel przewoźnika</text>
+<text x="225" y="831" font-size="6">Signature and stamp of carrier</text>
+<text x="398" y="825" font-size="12" font-weight="bold">24</text>
+<text x="420" y="823" font-size="6">Przesyłkę otrzymano</text>
+<text x="420" y="831" font-size="6">Goods received by consignee</text>
+<text x="7" y="891" font-size="5.5">CMR — Międzynarodowy samochodowy list przewozowy / International consignment note</text>
+</g></svg>
