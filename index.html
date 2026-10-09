@@ -4,7 +4,7 @@
 /* CMR v1.1 */
 .cmr-section{margin-top:24px}.copy-switch{display:flex;gap:5px;overflow-x:auto;padding:5px 0 12px}.copy-switch button{white-space:nowrap;font-size:12px;padding:11px 10px;background:#e7edf6;color:#1c3451}.copy-switch button.selected{background:#133b70;color:white}.zoom-tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:9px}.zoom-tools button{padding:10px 12px;background:#e7edf6}.zoom-tools output{font-weight:700;min-width:49px;text-align:center}.paper-scroll{overflow:auto;max-height:75vh;background:#dfe6ef;border-radius:10px;padding:12px;touch-action:pan-x pan-y;overscroll-behavior:contain}.paper-holder{width:max-content;margin:0 auto}.cmr-sheet{--ink:#d51c49;width:210mm;height:297mm;box-sizing:border-box;background:white;padding:9mm;box-shadow:0 3px 12px #999;font:9px Arial,sans-serif;color:#222;display:flex;flex-direction:column;gap:0;overflow:hidden}.cmr-sheet.blue{--ink:#1769ac}.cmr-sheet.green{--ink:#23965f}.cmr-sheet.black{--ink:#353535}.cmr-head{height:20mm;border:1.2px solid var(--ink);display:flex;justify-content:space-between;padding:3mm;color:var(--ink)}.cmr-head strong{font-size:27px;line-height:1}.cmr-head small{display:block;font-size:8px}.cmr-grid{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}.cmr-half{display:flex;flex-direction:column;min-height:0}.cmr-cell{border:0.75px solid var(--ink);padding:2.1mm;position:relative;min-height:0;overflow:hidden;flex-shrink:0}.cmr-cell .c-label{display:block;color:var(--ink);font-size:8px;line-height:1.15;min-height:11px}.cmr-cell .c-value{white-space:pre-wrap;overflow-wrap:anywhere;font-size:10.5px;line-height:1.22;padding-top:2mm}.cmr-cell .c-label b{font-size:12px;margin-right:2px}.cmr-twocol{display:grid;grid-template-columns:1fr 1fr}.cmr-goods{border-collapse:collapse;width:100%;table-layout:fixed;height:43mm}.cmr-goods th,.cmr-goods td{border:0.75px solid var(--ink);text-align:left;vertical-align:top;padding:1.8mm;overflow-wrap:anywhere}.cmr-goods th{color:var(--ink);font-size:8px;font-weight:normal;height:14mm}.cmr-goods td{font-size:9px}.cmr-bottom{display:grid;grid-template-columns:1fr 1fr 1fr;height:24mm}.cmr-footnote{font-size:6.6px;color:var(--ink);text-align:center;margin-top:2mm}.cmr-dummy{height:1px}.cmr-notice{color:#59687a;font-size:12px;line-height:1.45;margin-top:9px}@media print{@page{size:A4;margin:0}html,body{margin:0;padding:0;background:white}.print-only{display:block!important}.cmr-sheet{box-shadow:none;margin:0;page-break-after:always;break-after:page}.cmr-sheet:last-child{page-break-after:auto;break-after:auto}}
 
-/* Gigabajt CMR 1.9 — ostry wektor z nakładaniem danych */
+/* Gigabajt CMR 2.0 — ostry wektor z nakładaniem danych */
 .cmr-sheet{position:relative;display:block;width:210mm;height:297mm;padding:0;overflow:hidden;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#111;gap:0;box-shadow:0 3px 12px #999}
 .cmr-template-wrap{position:absolute;left:11mm;top:5mm;width:188mm;height:287.6mm}
 .cmr-template{position:absolute;inset:0;background:url('./cmr-template-perfect.png') no-repeat center/100% 100%}
@@ -25,7 +25,17 @@
 .ov.topgap{padding-top:.35mm}
 .cmr-notice{color:#59687a;font-size:12px;line-height:1.45;margin-top:9px}
 @media print{@page{size:A4;margin:0}html,body{margin:0;padding:0;background:white}.print-only{display:block!important}.cmr-sheet{box-shadow:none;margin:0;page-break-after:always;break-after:page}.cmr-sheet:last-child{page-break-after:auto;break-after:auto}.cmr-template-wrap{left:11mm;top:5mm;width:188mm;height:287.6mm}}
-</style></head><body><header><h1>🚚 Gigabajt CMR 1.9</h1><p>List przewozowy · bez internetu · Android</p></header><div class="wrap"><nav class="tabs"><button id="tab-form" class="active" onclick="showTab('form')">Nowy CMR</button><button id="tab-history" onclick="showTab('history')">Historia</button><button id="tab-preview" onclick="showTab('preview')">Podgląd</button></nav><div id="form" class="panel"><div class="banner">Dane zapisują się w pamięci telefonu. PDF utworzysz przez opcję „Drukuj / Zapisz jako PDF”.</div><h2>Dokument CMR</h2><div class="grid"><div><label>Numer CMR</label><input id="num" placeholder="np. 001"></div><div><label>Data wystawienia</label><input id="issued" type="date"></div><div class="full"><label>Miejsce wystawienia</label><input id="place" placeholder="np. Wrocław"></div></div>
+
+/* 2.0: One shared coordinate space for the printed A4 background and every entry. */
+.cmr-sheet{width:210mm;height:297mm;position:relative;padding:0;overflow:hidden;display:block;background:white}
+.cmr-template-wrap{position:absolute;inset:0;width:100%;height:100%}
+.cmr-template{position:absolute;inset:0;width:100%;height:100%;background:url('./cmr-template-perfect.png') center/100% 100% no-repeat}
+.cmr-overlay{position:absolute;inset:0;width:100%;height:100%}
+.ov{position:absolute;display:block;box-sizing:border-box;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.16;color:#171717;font:10px/1.16 Arial, sans-serif;padding:0;text-align:left}
+.ov.center{text-align:center}.ov.narrow{font-size:9px}.ov.sign{font-size:9px}
+.cmr-sheet .cmr-template{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+@media print{.cmr-template-wrap{inset:0;width:100%;height:100%}.cmr-overlay{inset:0;width:100%;height:100%}}
+</style></head><body><header><h1>🚚 Gigabajt CMR 2.0</h1><p>List przewozowy · bez internetu · Android</p></header><div class="wrap"><nav class="tabs"><button id="tab-form" class="active" onclick="showTab('form')">Nowy CMR</button><button id="tab-history" onclick="showTab('history')">Historia</button><button id="tab-preview" onclick="showTab('preview')">Podgląd</button></nav><div id="form" class="panel"><div class="banner">Dane zapisują się w pamięci telefonu. PDF utworzysz przez opcję „Drukuj / Zapisz jako PDF”.</div><h2>Dokument CMR</h2><div class="grid"><div><label>Numer CMR</label><input id="num" placeholder="np. 001"></div><div><label>Data wystawienia</label><input id="issued" type="date"></div><div class="full"><label>Miejsce wystawienia</label><input id="place" placeholder="np. Wrocław"></div></div>
 <h3>1. Nadawca</h3><label>Nazwa i pełny adres</label><textarea id="sender" placeholder="Firma, ulica, kod, miasto, kraj"></textarea><h3>2. Odbiorca</h3><label>Nazwa i pełny adres</label><textarea id="receiver"></textarea><h3>3–4. Dostawa i załadunek</h3><div class="grid"><div><label>3. Miejsce dostawy</label><input id="delivery"></div><div><label>4. Miejsce załadunku</label><input id="loading"></div><div><label>Data załadunku</label><input id="loaded" type="date"></div><div><label>Planowana data dostawy (pomocnicza)</label><input id="deliveryDate" type="date"></div></div><h3>5–6. Dokumenty i oznaczenia</h3><label>5. Załączone dokumenty</label><textarea id="documents"></textarea><label>6. Znaki i numery</label><textarea id="marks"></textarea>
 <h3>7–12. Towary</h3><div id="goods"></div><button class="secondary" type="button" onclick="addGood()">+ Dodaj pozycję towaru</button><h3>13–14. Instrukcje</h3><label>13. Instrukcje nadawcy</label><textarea id="instructions"></textarea><label>14. Postanowienia dotyczące przewoźnego</label><textarea id="freight"></textarea><h3>16. Przewoźnik</h3><label>Pełna nazwa i adres przewoźnika</label><textarea id="carrier"></textarea><div class="grid"><div><label>Ciągnik – numer rejestracyjny</label><input id="truck"></div><div><label>Naczepa – numer rejestracyjny</label><input id="trailer"></div></div><h3>17–19. Pozostałe informacje</h3><label>17. Kolejni przewoźnicy</label><textarea id="nextCarriers"></textarea><label>18. Zastrzeżenia przewoźnika</label><textarea id="reservations"></textarea><label>19. Postanowienia specjalne</label><textarea id="special"></textarea><h3>21–24. Dane końcowe</h3><label>21. Miejsce i data wystawienia (automatycznie z nagłówka)</label><label>23. Dodatkowe dane przewoźnika / kierowcy</label><textarea id="carrier23"></textarea><label>Uwagi pomocnicze (nie są drukowane na CMR)</label><textarea id="notes"></textarea><p id="validation" class="error"></p><div class="actions"><button class="primary" onclick="saveRecord()">💾 Zapisz CMR</button><button class="secondary" onclick="showTab('preview')">👁 Podgląd</button><button class="secondary" onclick="printCMR()">🖨 PDF / Drukuj</button><button class="danger" onclick="newRecord()">Nowy pusty</button></div></div>
 <div id="formLivePreview" class="panel cmr-section"><h2>Podgląd wypełnionej CMR</h2><div id="livePreview"></div></div><div id="history" class="panel hidden"><h2>Historia CMR</h2><p class="hint">Wszystkie dokumenty są przechowywane lokalnie na tym urządzeniu. Odinstalowanie aplikacji lub wyczyszczenie danych może je usunąć.</p><div class="actions"><button class="secondary" onclick="exportData()">Eksportuj kopię danych</button><button class="secondary" onclick="document.getElementById('importfile').click()">Importuj kopię danych</button><input class="hidden" id="importfile" type="file" accept="application/json" onchange="importData(event)"></div><div id="recordList"></div></div>
@@ -54,47 +64,69 @@ const copyNames=['1 · Nadawca','2 · Odbiorca','3 · Przewoźnik','4 · Kopia']
 const copyColors=['red','blue','green','black'];
 function sheetCell(n,label,value,h){return `<div class="cmr-cell" style="${h?'height:'+h+'mm;':''}"><div class="c-label"><b>${n}.</b> ${label}</div><div class="c-value">${esc(value||'')}</div></div>`}
 function cmrSheet(d,i){
+ // All geometry is referenced to ORIGINAL 1055x1491 image pixels.
+ // No nested offsets: image and overlay occupy exactly the same A4 rectangle.
+ const P=(v,x,y,w,hh,extra='')=>!String(v??'').trim()?'':`<div class="ov ${extra}" data-fit="1" style="left:${(x/1055*100).toFixed(5)}%;top:${(y/1491*100).toFixed(5)}%;width:${(w/1055*100).toFixed(5)}%;height:${(hh/1491*100).toFixed(5)}%">${esc(v).replace(/\n/g,'<br>')}</div>`;
  const goods=d.goods||[];
- const gstr=k=>goods.map(g=>g[k]||'').filter(Boolean).join('\n');
- const pos=(value,x,y,w,h,cls='')=>value?`<div class="ov ${cls}" style="left:${x}%;top:${y}%;width:${w}%;height:${h}%">${esc(value||'').replace(/\n/g,'<br>')}</div>`:'';
- const no=[d.truck||'',d.trailer||''].filter(Boolean).join(' / ');
- const loadData=[d.loading,d.loaded].filter(Boolean).join(' / ');
- const placeDate=[d.place,d.issued].filter(Boolean).join(' / ');
+ const g=k=>goods.map(it=>it[k]||'').filter(Boolean).join('\n');
+ const load=[d.loading,d.loaded].filter(Boolean).join(' / ');
  return `<div class="cmr-sheet ${copyColors[i]}"><div class="cmr-template-wrap"><div class="cmr-template"></div><div class="cmr-overlay">
- ${pos(d.sender,10.3,8.5,37.0,5.7,'addr')}
- ${pos(d.receiver,10.3,18.4,37.0,3.3,'addr')}
- ${pos(d.delivery,10.3,25.4,37.0,1.8,'small')}
- ${pos(loadData,10.3,31.1,37.0,1.8,'small')}
- ${pos(d.documents,10.3,36.7,37.0,1.7,'small')}
- ${pos(d.carrier,54.0,18.4,37.7,2.7,'addr')}
- ${pos(no,55.0,22.5,34.0,1.6,'reg center')}
- ${pos(d.nextCarriers,54.0,26.0,37.7,2.3,'small')}
- ${pos(d.reservations,54.0,33.2,37.7,4.0,'small')}
- ${pos(d.marks,7.4,42.1,13.9,13.8,'goods')}
- ${pos(gstr('packages'),22.2,42.1,9.2,13.8,'goodsnarrow center')}
- ${pos(gstr('packing'),33.0,42.1,10.4,13.8,'goods')}
- ${pos(gstr('name'),45.6,42.1,10.4,13.8,'goodswide')}
- ${pos(gstr('stat'),57.8,42.1,11.4,13.8,'goodsnarrow center')}
- ${pos(gstr('weight'),70.5,42.1,11.5,13.8,'goodsnarrow center')}
- ${pos(gstr('volume'),83.2,42.1,9.7,13.8,'goodsnarrow center')}
- ${pos(d.instructions,10.3,64.5,37.4,7.8,'small')}
- ${pos(d.special,54.0,63.3,37.7,1.5,'tiny')}
- ${pos(d.freight,10.3,77.5,37.0,1.5,'tiny')}
- ${pos(placeDate,10.3,80.8,37.0,1.4,'small')}
- ${pos(d.carrier23||'',36.5,86.4,24.0,3.5,'sign center')}
+ ${P(d.sender,110,123,390,94)}
+ ${P(d.receiver,110,273,390,47)}
+ ${P(d.delivery,110,376,390,29)}
+ ${P(load,110,458,390,29)}
+ ${P(d.documents,110,539,390,24)}
+ ${P(d.carrier,569,274,396,29)}
+ ${P([d.truck,d.trailer].filter(Boolean).join(' / '),690,312,276,23,'center')}
+ ${P(d.nextCarriers,569,394,393,45)}
+ ${P(d.reservations,569,493,393,66)}
+ ${P(d.marks,78,626,144,208)}
+ ${P(g('packages'),242,634,91,199,'center narrow')}
+ ${P(g('packing'),350,626,115,208,'narrow')}
+ ${P(g('name'),482,627,112,208)}
+ ${P(g('stat'),612,625,119,208,'center narrow')}
+ ${P(g('weight'),749,625,110,208,'center narrow')}
+ ${P(g('volume'),880,625,102,208,'center narrow')}
+ ${P(d.instructions,114,950,396,127)}
+ ${P(d.special,570,941,390,10,'narrow')}
+ ${P(d.freight,117,1150,396,11,'narrow')}
+ ${P(d.place,165,1194,145,18,'narrow')}
+ ${P(d.issued,336,1194,154,18,'narrow')}
+ ${P(d.carrier23,389,1264,262,61,'sign')}
  </div></div></div>`;
 }
+function fitCMR(root){
+ if(!root)return;
+ root.querySelectorAll('.ov[data-fit]').forEach(node=>{
+   let max=10,min=6,chosen=min;
+   for(let j=0;j<7;j++){
+     const size=(min+max)/2; node.style.fontSize=size+'px';
+     if(node.scrollHeight<=node.clientHeight+1 && node.scrollWidth<=node.clientWidth+1){chosen=size;min=size}else max=size;
+   }
+   node.style.fontSize=chosen+'px';
+ });
+}
 function cmrViewer(id){return `<div class="copy-switch">${copyNames.map((n,i)=>`<button type="button" class="${copyIndex===i?'selected':''}" onclick="selectCopy(${i})">${n}</button>`).join('')}</div><div class="zoom-tools"><button type="button" onclick="changeZoom(-.12)">−</button><output>${Math.round(zoomLevel*100)}%</output><button type="button" onclick="changeZoom(.12)">+</button><button type="button" onclick="setZoom(.45)">Dopasuj</button><button type="button" onclick="setZoom(1)">100%</button></div><div class="paper-scroll"><div class="paper-holder" style="zoom:${zoomLevel}">${cmrSheet(getData(),copyIndex)}</div></div><p class="cmr-notice">Przesuwaj powiększony dokument palcem. Zmiana skali dotyczy tylko podglądu, nie wydruku.</p>`}
-function renderPreview(){el('previewData').innerHTML=cmrViewer('previewData')}
-function renderLivePreview(){el('livePreview').innerHTML=cmrViewer('livePreview')}
+function renderPreview(){el('previewData').innerHTML=cmrViewer('previewData');fitCMR(el('previewData'))}
+function renderLivePreview(){el('livePreview').innerHTML=cmrViewer('livePreview');fitCMR(el('livePreview'))}
 function refreshViews(){if(!el('form').classList.contains('hidden'))renderLivePreview();if(!el('preview').classList.contains('hidden'))renderPreview()}
 function selectCopy(i){copyIndex=i;refreshViews()}
 function setZoom(v){zoomLevel=Math.max(.25,Math.min(1.5,Math.round(v*100)/100));refreshViews()}
 function changeZoom(v){setZoom(zoomLevel+v)}
 function exportData(){const payload=JSON.stringify({version:1,records:records()},null,2);const blob=new Blob([payload],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='gigabajt-cmr-kopia.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
 function importData(evt){const f=evt.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>{try{let obj=JSON.parse(reader.result);if(!Array.isArray(obj.records))throw Error('format');if(!confirm('Zaimportować '+obj.records.length+' dokumentów? Dane o tych samych identyfikatorach zostaną zastąpione.'))return;let m=new Map(records().map(r=>[r.id,r]));for(const r of obj.records)if(r&&typeof r.id==='string')m.set(r.id,r);localStorage.setItem('gbcmr-records',JSON.stringify([...m.values()]));renderHistory();toast('Import zakończony')}catch(e){toast('Nieprawidłowy plik kopii danych')}};reader.readAsText(f);evt.target.value=''}
-function cmrHtml(d){return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>CMR ${esc(d.num)}</title><base href="${location.href.split('?')[0]}"><style>${document.querySelector('style').textContent}body{background:white}.cmr-sheet{box-shadow:none;margin:0;page-break-after:always;break-after:page}.cmr-sheet:last-child{page-break-after:auto;break-after:auto}@page{size:A4;margin:0}</style></head><body>${[0,1,2,3].map(i=>cmrSheet(d,i)).join('')}</body></html>`}
+function cmrHtml(d){return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>CMR ${esc(d.num)}</title><base href="${new URL('./',location.href).href}"><style>${document.querySelector('style').textContent}body{background:white}.cmr-sheet{box-shadow:none;margin:0;page-break-after:always;break-after:page}.cmr-sheet:last-child{page-break-after:auto;break-after:auto}@page{size:A4;margin:0}
+/* 2.0: One shared coordinate space for the printed A4 background and every entry. */
+.cmr-sheet{width:210mm;height:297mm;position:relative;padding:0;overflow:hidden;display:block;background:white}
+.cmr-template-wrap{position:absolute;inset:0;width:100%;height:100%}
+.cmr-template{position:absolute;inset:0;width:100%;height:100%;background:url('./cmr-template-perfect.png') center/100% 100% no-repeat}
+.cmr-overlay{position:absolute;inset:0;width:100%;height:100%}
+.ov{position:absolute;display:block;box-sizing:border-box;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap;line-height:1.16;color:#171717;font:10px/1.16 Arial, sans-serif;padding:0;text-align:left}
+.ov.center{text-align:center}.ov.narrow{font-size:9px}.ov.sign{font-size:9px}
+.cmr-sheet .cmr-template{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+@media print{.cmr-template-wrap{inset:0;width:100%;height:100%}.cmr-overlay{inset:0;width:100%;height:100%}}
+</style></head><body>${[0,1,2,3].map(i=>cmrSheet(d,i)).join('')}<script>window.addEventListener('load',()=>{document.querySelectorAll('.ov[data-fit]').forEach(e=>{let s=10;while(s>6&&(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)){e.style.fontSize=(--s)+'px'}})})<\/script></body></html>`}
 function printCMR(){const d=getData();if(validate(d).length&&!confirm('Niektóre podstawowe pola są puste. Mimo to przygotować PDF?'))return;if(window.AndroidCMR&&window.AndroidCMR.printCMR){window.AndroidCMR.printCMR(cmrHtml(d));}else{const w=window.open('','_blank');if(!w){toast('Otwórz aplikację na Androidzie, aby wydrukować');return}w.document.write(cmrHtml(d));w.document.close();setTimeout(()=>w.print(),400)}}
 (function init(){let d;try{d=JSON.parse(localStorage.getItem('gbcmr-draft')||'null')}catch(e){};setData(d||{issued:today(),loaded:today(),num:'001'});document.querySelectorAll('input,textarea').forEach(node=>{node.addEventListener('change',()=>{draftSave();refreshViews()})});renderLivePreview();document.addEventListener('input',()=>{clearTimeout(window.draftTimer);window.draftTimer=setTimeout(()=>{draftSave();refreshViews()},350)})})();function draftSave(){try{localStorage.setItem('gbcmr-draft',JSON.stringify(getData()))}catch(e){toast('Brak miejsca na zapis danych')}}
-if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=19').then(r=>r.update()).catch(()=>{});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=20').then(r=>r.update()).catch(()=>{});
 </script></body></html>

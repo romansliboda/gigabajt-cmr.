@@ -1,1 +1,1 @@
-Gigabajt CMR 1.4: Rozpakuj archiwum i wgraj 7 plików do katalogu głównego repozytorium GitHub. Nowy druk to cmr-template-vector.svg (ostry wektor, offline). Szablon jest odtworzony na podstawie standardowych wzorów CMR; wymaga testowego wydruku przed użyciem zawodowym.
+Gigabajt CMR 2.0. Wgraj pliki do głównego katalogu GitHub. Nie usuwaj lokalnych zapisanych dokumentów. Testuj przed użyciem w trasie. Wydruk A4.
