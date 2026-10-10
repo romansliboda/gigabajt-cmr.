@@ -1,1 +1,1 @@
-CMR 10.3 TEST — naprawa pustego widoku. Scena pochodzi ze sprawdzonej wersji 10.1. Zablokowany dotyk; animowany śnieg rysowany lekko przez canvas (bez dodatkowych obiektów WebGL). Model 12 bez zmian. Formularze i historia CMR zachowane.
+Gigabajt CMR 10.4 TEST: poprawka położenia animacji śniegu tak, aby znajdowała się na czarnym ekranie telewizora. Model 3D 12, układ, historia i formularze bez zmian. Wgraj wszystkie pliki do katalogu głównego repozytorium, zatwierdź zmiany i otwórz link testowy z v=104.
