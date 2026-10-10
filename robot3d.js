@@ -23,19 +23,82 @@ const palette={white:[.91,.95,1],blue:[.035,.62,1],dark:[.04,.07,.12],black:[.01
 let projection,view,mode='tv',weather='rain',temperature=10,elapsed=0,last=0,modeStart=0,returnAt=0,greetText='',tvBroken=false,watchMs=0,lastTouch=0;
 function draw(mesh,world,color,glow=0){const mv=mul(view,world),mvp=mul(projection,mv);gl.uniformMatrix4fv(uMvp,false,new Float32Array(mvp));gl.uniformMatrix4fv(uWorld,false,new Float32Array(world));gl.uniform3fv(uCol,palette[color]||color);gl.uniform1f(uGlow,glow);gl.bindBuffer(gl.ARRAY_BUFFER,mesh.p);gl.vertexAttribPointer(atP,3,gl.FLOAT,false,0,0);gl.enableVertexAttribArray(atP);gl.bindBuffer(gl.ARRAY_BUFFER,mesh.n);gl.vertexAttribPointer(atN,3,gl.FLOAT,false,0,0);gl.enableVertexAttribArray(atN);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,mesh.i);gl.drawElements(gl.TRIANGLES,mesh.c,gl.UNSIGNED_SHORT,0)}
 function obj(mesh,parent,x,y,z,sx,sy,sz,color,glow=0,rot=0){let w=mul(parent,mul(trans(x,y,z),mul(ry(rot),scale(sx,sy,sz))));draw(mesh,w,color,glow)}
-function robot(t){let cyc=(t-modeStart),isDrive=mode==='drive',isGreet=mode==='hello',isWork=mode==='work',isTV=mode==='tv';let x=isTV?-.90:isWork?-1.12:isGreet?-.65:-1.55+((cyc%9)/9)*2.7;let yaw=isTV?1.0:isWork?.5:isGreet?0:(Math.floor(cyc/9)%2? -1.3:1.3);let bob=Math.sin(t*4)*.035;let main=mul(trans(x,isDrive?bob:0,0),ry(yaw));if(isTV)main=mul(trans(x,-.16,0),ry(yaw));let head=mul(main,mul(trans(0,1.2+.07*Math.sin(t*1.65),0),ry(.10*Math.sin(t*1.1))));
-obj(sph,main,0,.60,0,.42,.53,.37,'white');obj(sph,main,0,.62,.30,.12,.15,.09,'blue',1);
-for(let side of [-1,1]){obj(sph,main,side*.46,.73,0,.15,.22,.18,'white');obj(sph,main,side*.47,.36,.02,.11,.24,.13,'side',0,.1*Math.sin(t*3+side));obj(sph,main,side*.28,.22,.01,.25,.24,.27,'white');obj(sph,main,side*.28,.12,.19,.17,.18,.14,'side');obj(sph,main,side*.28,.11,.34,.11,.12,.05,'blue',1)}
-obj(sph,head,0,0,0,.62,.52,.48,'white');obj(sph,head,0,-.015,.39,.50,.40,.155,'black');for(let s of [-1,1]){obj(sph,head,s*.22,0,.53,.12,.15,.055,'blue',1);obj(sph,head,s*.24,0,.574,.055,.09,.018,'dark')}
-obj(sph,head,-.60,0,0,.12,.20,.17,'side');obj(sph,head,.60,0,0,.12,.20,.17,'side');obj(sph,head,0,.58,0,.055,.22,.055,'side');obj(sph,head,0,.78,0,.115,.11,.115,'blue',1);
-if(isWork){obj(box,main,.14,.53,.64,.45,.42,.04,'paper');for(let k=0;k<3;k++)obj(box,main,.14,.67-k*.10,.69,.31,.01,.01,'pink');obj(box,main,.46,.42,.70,.018,.32,.018,'blue',0,0.45+Math.sin(t*5)*.2)}
-if(isGreet){obj(sph,main,.54,1.04,.05,.16,.19,.14,'white');obj(sph,main,.57,1.2,.05,.13,.11,.10,'side')}
+function robot(t){
+ const phase=t-modeStart,driving=mode==='drive',greeting=mode==='hello',working=mode==='work',watching=mode==='tv';
+ // One real 3D character with articulated head, eyes, arms and wheels.
+ const trip=(phase%9)/9, movingRight=Math.floor(phase/9)%2===0;
+ const x=watching?-.35:working?-1.03:greeting?-.80: -1.65+(movingRight?trip:1-trip)*2.55;
+ const yaw=watching?1.05:working?.48:greeting?-.04:(movingRight?1.45:-1.45);
+ const bob=driving?.035*Math.sin(t*13):watching?-.12:.024*Math.sin(t*2.5);
+ const base=mul(trans(x,bob,.22),ry(yaw));
+ const neck=mul(base,trans(0,1.05,0));
+ const head=mul(neck,mul(ry((watching?.17:0)+.14*Math.sin(t*.85)),rz((working?-.10:0)+.055*Math.sin(t*1.3))));
+ // body, shoulder joints, forearms, spherical drive pods
+ obj(sph,base,0,.57,0,.49,.56,.39,'white');
+ obj(sph,base,0,.64,.37,.125,.135,.065,'blue',1);
+ for(const side of [-1,1]){
+   obj(sph,base,side*.45,.75,0,.18,.19,.18,'side');
+   obj(sph,base,side*.52,.62,.03,.16,.22,.16,'white');
+   obj(sph,base,side*.52,.38,.14,.14,.16,.15,'side',0,side*.18+Math.sin(t*2+side)*.08);
+   obj(sph,base,side*.27,.22,.03,.29,.27,.30,'white');
+   obj(sph,base,side*.27,.17,.29,.22,.20,.12,'side');
+   obj(sph,base,side*.27,.17,.40,.16,.15,.042,'blue',1);
+ }
+ // large rounded head and glossy black curved display
+ obj(sph,head,0,.09,0,.81,.62,.59,'white');
+ obj(sph,head,0,.04,.49,.65,.48,.23,'black');
+ // eyes are on display, blink periodically, glance gently toward TV
+ const blinkPhase=t%5.9;
+ const blink=blinkPhase>5.64?Math.max(.08,Math.abs(blinkPhase-5.77)*8):1;
+ const glance=watching?.03*Math.sin(t*1.1):0;
+ for(const side of [-1,1]){
+   obj(sph,head,side*.28+glance,.075,.704,.115,.105*blink,.025,'blue',1);
+   obj(sph,head,side*.28+glance,.084,.730,.040,.052*blink,.018,'black');
+ }
+ obj(sph,head,0,-.17,.69,.155,.029,.018,'blue',1);
+ for(const side of [-1,1]){
+   obj(sph,head,side*.80,.07,-.02,.15,.235,.23,'side');
+   obj(sph,head,side*.835,.07,.09,.075,.16,.095,'blue',1);
+ }
+ obj(sph,head,0,.71,0,.055,.17,.055,'side');
+ obj(sph,head,0,.87,0,.105,.11,.105,'blue',1);
+ if(working){
+   obj(box,base,.26,.55,.72,.48,.37,.025,'paper');
+   for(let k=0;k<4;k++)obj(box,base,.26,.68-k*.105,.756,.31,.009,.008,'pink');
+   obj(box,base,.64,.47,.76,.016,.22,.018,'blue',0,.32+Math.sin(t*4)*.3);
+ }
+ if(greeting){
+   obj(sph,base,.62,1.18,.15,.17,.20,.16,'white');
+   obj(sph,base,.70,1.38,.15,.15,.14,.12,'side');
+ }
 }
-function scenery(t){let I=mat();obj(box,I,0,-.29,0,5.1,.07,2.3,'floor');obj(sph,I,-.87,-.22,.1,.65,.06,.38,'gray');
-obj(box,I,1.45,.45,-.18,.68,.63,.35,'orange');obj(box,I,1.40,.47,.19,.49,.41,.035,'dark');if(mode==='tv'&&!tvBroken){obj(box,I,1.40,.47,.235,.43,.34,.01,'screen',1);obj(box,I,1.43,.50,.25,.20,.12,.01, Math.sin(t*2)>0?'green':'sun',1)}else if(tvBroken){obj(box,I,1.40,.47,.235,.43,.34,.01,'gray');}else obj(box,I,1.40,.47,.235,.43,.34,.01,'black');obj(sph,I,1.93,.60,.18,.055,.06,.07,'dark');obj(sph,I,1.93,.37,.18,.055,.06,.07,'dark');obj(box,I,1.45,-.01,-.2,.55,.08,.30,'orange');
-if(weather==='rain'&&mode==='hello'){obj(sph,I,-.65,2.3,.05,.55,.12,.32,'blue');obj(box,I,-.65,1.88,.05,.025,.55,.026,'dark')}if(weather==='sun'&&mode==='hello')obj(sph,I,-1.8,2.3,-.15,.22,.22,.12,'sun',1);
+function scenery(t){
+ const I=mat();
+ // plain white room with a discrete contact floor
+ obj(box,I,0,-.29,0,5.7,.06,2.55,'floor');
+ obj(sph,I,-.36,-.245,.16,.62,.036,.38,'gray');
+ // separate retro TV with convex screen, knobs, legs and illuminated program
+ obj(box,I,1.44,.46,-.12,.69,.59,.43,'orange');
+ obj(box,I,1.37,.49,.34,.52,.43,.047,'side');
+ obj(sph,I,1.35,.49,.392,.44,.36,.039,'dark');
+ if(mode==='tv'&&!tvBroken){
+   obj(sph,I,1.35,.49,.423,.38,.30,.015,'screen',1);
+   obj(box,I,1.35,.35,.445,.35,.065,.01,'green',1);
+   obj(sph,I,1.60,.63,.449,.065,.06,.012,'sun',1);
+ }else if(tvBroken){obj(sph,I,1.35,.49,.426,.38,.30,.014,'gray');}
+ else{obj(sph,I,1.35,.49,.426,.38,.30,.014,'black');}
+ for(const ky of [.68,.45,.23])obj(sph,I,1.98,ky,.31,.063,.061,.069,'side');
+ for(const side of [-1,1])obj(box,I,1.44+side*.40,-.06,-.16,.085,.19,.10,'orange');
+ // thin antenna rods
+ obj(box,I,1.36,1.16,-.15,.026,.25,.028,'side');obj(box,I,1.62,1.17,-.15,.026,.25,.028,'side');
+ if(weather==='rain'&&mode==='hello'){
+   obj(sph,I,-.78,2.56,-.08,.56,.19,.36,'gray');
+   for(const side of [-1,0,1])obj(sph,I,-.78+side*.3,2.14,-.08,.045,.14,.05,'blue',1);
+ }
+ if(weather==='sun'&&mode==='hello')obj(sph,I,-1.90,2.48,-.28,.22,.22,.12,'sun',1);
 }
-function resize(){const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);canvas.width=Math.round(w*dpi);canvas.height=Math.round(h*dpi);gl.viewport(0,0,canvas.width,canvas.height);projection=perspective(Math.PI/3,w/h,.1,100);view=lookAt([0,1.45,6.1],[0,.8,0])}
+
+function resize(){const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);canvas.width=Math.round(w*dpi);canvas.height=Math.round(h*dpi);gl.viewport(0,0,canvas.width,canvas.height);projection=perspective(Math.PI/3.35,w/h,.1,100);view=lookAt([0,1.30,5.45],[0,.87,0])}
 function setMode(m){mode=m;modeStart=elapsed;label.textContent={tv:'Ogląda telewizor — ekran jest włączony',drive:'Jeździ bokiem i obraca się',work:'Czyta i wypełnia CMR',hello:'Cześć! Co słychać?'}[m];bubble.classList.toggle('on',m==='hello');bubble.textContent=weather==='rain'?'Cześć! Dziś pada, około 10°C 🌧️':'Cześć! Dziś słonecznie, około 27°C ☀️';returnAt=m==='hello'?elapsed+6.5:0}
 for(let [id,m] of Object.entries({tv:'tv',drive:'drive',cmr:'work',hello:'hello'}))document.getElementById(id).onclick=()=>setMode(m);
 document.getElementById('rain').onclick=()=>{weather='rain';temperature=10;setMode('hello')};document.getElementById('sun').onclick=()=>{weather='sun';temperature=27;setMode('hello')};

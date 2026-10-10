@@ -1,1 +1,1 @@
-Gigabajt CMR 2.0. Wgraj pliki do głównego katalogu GitHub. Nie usuwaj lokalnych zapisanych dokumentów. Testuj przed użyciem w trasie. Wydruk A4.
+NOWY ROBOT 3D TEST 2 — bez ingerencji w CMR. Wgraj index.html i robot3d.js razem do głównego katalogu GitHub (UWAGA: to demo, zastępuje stronę aplikacji, jeśli używasz tego samego repo). Po testach przywróć pełną paczkę CMR.
