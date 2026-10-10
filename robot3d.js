@@ -20,90 +20,66 @@ function perspective(fov,aspect,near,far){const m=new Array(16).fill(0),f=1/Math
 function lookAt(eye,target){let z=normalize(sub(eye,target)),x=normalize(cross([0,1,0],z)),y=cross(z,x);return[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1]}
 const sub=(a,b)=>a.map((v,i)=>v-b[i]),dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],normalize=v=>{let l=Math.hypot(...v)||1;return v.map(a=>a/l)};
 const palette={white:[.91,.95,1],blue:[.035,.62,1],dark:[.04,.07,.12],black:[.018,.025,.04],side:[.12,.19,.28],orange:[1,.43,.055],screen:[.1,.53,.66],floor:[.92,.96,1],paper:[.97,.99,1],pink:[.92,.2,.33],sun:[1,.75,.16],green:[.2,.75,.54],gray:[.63,.72,.83]};
-let projection,view,mode='tv',weather='rain',temperature=10,elapsed=0,last=0,modeStart=0,returnAt=0,greetText='',tvBroken=false,watchMs=0,lastTouch=0;
+let projection,view,mode='tv',weather='sun',temperature=27,elapsed=0,last=0,modeStart=0,returnAt=0,greetText='',tvBroken=false,watchMs=0,lastTouch=0;
 function draw(mesh,world,color,glow=0){const mv=mul(view,world),mvp=mul(projection,mv);gl.uniformMatrix4fv(uMvp,false,new Float32Array(mvp));gl.uniformMatrix4fv(uWorld,false,new Float32Array(world));gl.uniform3fv(uCol,palette[color]||color);gl.uniform1f(uGlow,glow);gl.bindBuffer(gl.ARRAY_BUFFER,mesh.p);gl.vertexAttribPointer(atP,3,gl.FLOAT,false,0,0);gl.enableVertexAttribArray(atP);gl.bindBuffer(gl.ARRAY_BUFFER,mesh.n);gl.vertexAttribPointer(atN,3,gl.FLOAT,false,0,0);gl.enableVertexAttribArray(atN);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,mesh.i);gl.drawElements(gl.TRIANGLES,mesh.c,gl.UNSIGNED_SHORT,0)}
 function obj(mesh,parent,x,y,z,sx,sy,sz,color,glow=0,rot=0){let w=mul(parent,mul(trans(x,y,z),mul(ry(rot),scale(sx,sy,sz))));draw(mesh,w,color,glow)}
 function robot(t){
- const phase=t-modeStart,driving=mode==='drive',greeting=mode==='hello',working=mode==='work',watching=mode==='tv';
- // One real 3D character with articulated head, eyes, arms and wheels.
- const trip=(phase%9)/9, movingRight=Math.floor(phase/9)%2===0;
- const x=watching?-.65:working?-1.05:greeting?-.80: -1.75+(movingRight?trip:1-trip)*2.4;
- const yaw=watching?.82:working?.38:greeting?-.04:(movingRight?1.3:-1.3);
- const bob=driving?.035*Math.sin(t*13):watching?-.12:.024*Math.sin(t*2.5);
- const base=mul(trans(x,bob,.22),ry(yaw));
- const neck=mul(base,trans(0,1.05,0));
- const head=mul(neck,mul(ry((watching?.17:0)+.14*Math.sin(t*.85)),rz((working?-.10:0)+.055*Math.sin(t*1.3))));
- // body, shoulder joints, forearms, spherical drive pods
- obj(sph,base,0,.60,0,.51,.52,.42,'white');
- obj(sph,base,0,.64,.37,.125,.135,.065,'blue',1);
+ const phase=t-modeStart, driving=mode==='drive', greeting=mode==='hello', watching=mode==='tv';
+ const trip=(phase%7)/7, rightward=Math.floor(phase/7)%2===0;
+ const x=watching?-.68:greeting?-.72:-1.65+(rightward?trip:1-trip)*2.65;
+ const z=watching?.26:greeting?.5: .16+.70*Math.sin(phase*.31);
+ const yaw=watching?.88:greeting?0:(rightward?1.22:-1.22);
+ const bob=.07*Math.sin(t*2.7);
+ const base=mul(trans(x,1.31+bob,z),mul(ry(yaw),rz(.027*Math.sin(t*.95))));
+ // One floating head: no body, hands, legs or wheels. Rounded 3D shell.
+ obj(sph,base,0,0,-.08,.99,.83,.70,'white');
+ obj(sph,base,0,.01,.42,.89,.70,.285,'side');
+ obj(sph,base,0,.00,.577,.83,.625,.205,'black');
+ // Tiny rounded brow highlight on the top edge of the curved dark display.
+ obj(sph,base,-.22,.48,.709,.32,.045,.024,[.20,.25,.31]);
+ // Solid blue square eyes inspired by the approved face reference.
+ const blink=t%5.4>5.16,eyeH=blink?.035:.225;
+ const glance=watching?.05*Math.sin(t*.72):0;
  for(const side of [-1,1]){
-   obj(sph,base,side*.43,.77,0,.155,.17,.16,'side');
-   obj(sph,base,side*.51,.59,.10,.16,.24,.18,'white');
-   obj(sph,base,side*.51,.38,.18,.14,.15,.14,'side',0,side*.18+Math.sin(t*2+side)*.08);
-   obj(sph,base,side*.28,.21,.03,.29,.25,.29,'white');
-   obj(sph,base,side*.27,.17,.29,.22,.20,.12,'side');
-   obj(sph,base,side*.27,.17,.40,.16,.15,.042,'blue',1);
+   obj(sph,base,side*.32+glance,.025,.769,.235,eyeH,.037,'blue',1);
+   obj(sph,base,side*.32+glance-.055,.10,.802,.035,blink?.006:.035,.009,[.57,.95,1],1);
  }
- // large rounded head and glossy black curved display
- obj(sph,head,0,.10,0,.86,.69,.62,'white');
- obj(sph,head,0,.04,.525,.73,.52,.245,'black');
- // eyes are on display, blink periodically, glance gently toward TV
- const blinkPhase=t%5.9;
- const blink=blinkPhase>5.64?Math.max(.08,Math.abs(blinkPhase-5.77)*8):1;
- const glance=watching?.03*Math.sin(t*1.1):0;
+ // Curved metallic golden side caps, rounded and visibly projecting.
  for(const side of [-1,1]){
-   obj(sph,head,side*.29+glance,.075,.757,.137,.145*blink,.043,'blue',1);
-   obj(sph,head,side*.29+glance-.045,.119,.799,.033,.038*blink,.010,'paper',1);
+   obj(sph,base,side*.935,.005,.01,.17,.27,.27,[.75,.59,.34]);
+   obj(sph,base,side*1.02,.005,.01,.055,.21,.21,[.80,.69,.45]);
  }
- obj(sph,head,0,-.205,.748,.125,.022,.025,'blue',1);
- for(const side of [-1,1]){
-   obj(sph,head,side*.83,.07,-.02,.18,.24,.24,'side');
-   obj(sph,head,side*.865,.07,.12,.095,.17,.10,'blue',1);
- }
- obj(sph,head,0,.71,0,.055,.17,.055,'side');
- obj(sph,head,0,.87,0,.105,.11,.105,'blue',1);
- if(working){
-   obj(box,base,.26,.55,.72,.48,.37,.025,'paper');
-   for(let k=0;k<4;k++)obj(box,base,.26,.68-k*.105,.756,.31,.009,.008,'pink');
-   obj(box,base,.64,.47,.76,.016,.22,.018,'blue',0,.32+Math.sin(t*4)*.3);
- }
- if(greeting){
-   obj(sph,base,.62,1.18,.15,.17,.20,.16,'white');
-   obj(sph,base,.70,1.38,.15,.15,.14,.12,'side');
- }
+ obj(sph,base,0,.815,-.06,.34,.055,.31,'side');
+ // An actual projected contact shadow on the floor, below the floating head.
+ const shadow=mul(trans(x,-.18,z),scale(.83,.013,.40));
+ draw(sph,shadow,[.67,.72,.78]);
 }
 function scenery(t){
  const I=mat();
- // plain white room with a discrete contact floor
- obj(box,I,0,-.29,0,5.7,.06,2.55,'floor');
- obj(sph,I,-.36,-.245,.16,.62,.036,.38,'gray');
- // separate retro TV with convex screen, knobs, legs and illuminated program
- obj(box,I,1.44,.46,-.12,.69,.59,.43,'orange');
- obj(sph,I,1.44,.46,-.12,.74,.60,.42,'orange');
- obj(box,I,1.37,.49,.34,.54,.44,.048,'side');
- obj(sph,I,1.35,.49,.392,.44,.36,.039,'dark');
- if(mode==='tv'&&!tvBroken){
-   obj(sph,I,1.35,.49,.423,.38,.30,.015,'screen',1);
-   obj(box,I,1.35,.35,.445,.35,.065,.01,'green',1);
-   obj(sph,I,1.60,.63,.449,.065,.06,.012,'sun',1);
- }else if(tvBroken){obj(sph,I,1.35,.49,.426,.38,.30,.014,'gray');}
- else{obj(sph,I,1.35,.49,.426,.38,.30,.014,'black');}
- for(const ky of [.68,.45,.23])obj(sph,I,1.98,ky,.31,.063,.061,.069,'side');
- for(const side of [-1,1])obj(box,I,1.44+side*.40,-.06,-.16,.085,.19,.10,'orange');
- // thin antenna rods
- obj(box,I,1.36,1.16,-.15,.026,.25,.028,'side');obj(box,I,1.62,1.17,-.15,.026,.25,.028,'side');
- if(weather==='rain'&&mode==='hello'){
-   obj(sph,I,-.78,2.56,-.08,.56,.19,.36,'gray');
-   for(const side of [-1,0,1])obj(sph,I,-.78+side*.3,2.14,-.08,.045,.14,.05,'blue',1);
+ // Minimal pale floor, no elaborate background or extra props.
+ obj(box,I,0,-.28,0,5.5,.045,2.75,'floor');
+ // Orange retro TV turned about 25 degrees in perspective, towards the robot.
+ const tv=mul(trans(1.54,.53,-.25),ry(-.48));
+ obj(box,tv,0,0,0,.75,.60,.46,'orange');
+ obj(sph,tv,0,0,.02,.75,.60,.45,'orange');
+ obj(box,tv,-.15,.02,.438,.50,.44,.028,'side');
+ obj(sph,tv,-.15,.02,.472,.43,.37,.04,'black');
+ const on=mode==='tv';
+ obj(sph,tv,-.15,.02,.514,.38,.33,.012,on?'screen':'side',on?1:0);
+ if(on){
+   obj(box,tv,-.15,-.18,.532,.35,.065,.01,'green',1);
+   obj(sph,tv,.035,.16,.536,.055,.053,.008,'sun',1);
  }
- if(weather==='sun'&&mode==='hello')obj(sph,I,-1.90,2.48,-.28,.22,.22,.12,'sun',1);
+ for(const ky of [.27,.05,-.18])obj(sph,tv,.53,ky,.40,.061,.056,.054,'side');
+ for(const side of [-1,1])obj(box,tv,side*.41,-.63,-.10,.095,.16,.10,'orange');
+ obj(box,tv,.06,.70,-.08,.024,.25,.025,'side',0,-.31);
+ obj(box,tv,.32,.70,-.08,.024,.25,.025,'side',0,.31);
 }
-
 function resize(){const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);canvas.width=Math.round(w*dpi);canvas.height=Math.round(h*dpi);gl.viewport(0,0,canvas.width,canvas.height);projection=perspective(Math.PI/3.35,w/h,.1,100);view=lookAt([0,1.43,5.0],[0,.95,0])}
-function setMode(m){mode=m;modeStart=elapsed;label.textContent={tv:'Ogląda telewizor — ekran jest włączony',drive:'Jeździ bokiem i obraca się',work:'Czyta i wypełnia CMR',hello:'Cześć! Co słychać?'}[m];bubble.classList.toggle('on',m==='hello');bubble.textContent=weather==='rain'?'Cześć! Dziś pada, około 10°C 🌧️':'Cześć! Dziś słonecznie, około 27°C ☀️';returnAt=m==='hello'?elapsed+6.5:0}
-for(let [id,m] of Object.entries({tv:'tv',drive:'drive',cmr:'work',hello:'hello'}))document.getElementById(id).onclick=()=>setMode(m);
-document.getElementById('rain').onclick=()=>{weather='rain';temperature=10;setMode('hello')};document.getElementById('sun').onclick=()=>{weather='sun';temperature=27;setMode('hello')};
+function setMode(m){mode=m;modeStart=elapsed;label.textContent={tv:'Unosi się i ogląda telewizor',drive:'Porusza się po pokoju',work:'Rozgląda się po pokoju',hello:'Cześć, co słychać?'}[m];bubble.classList.toggle('on',m==='hello');bubble.textContent=weather==='rain'?'Cześć! Dziś pada, około 10°C 🌧️':'Cześć! Dziś słonecznie, około 27°C ☀️';returnAt=m==='hello'?elapsed+3.5:0}
+for(let [id,m] of Object.entries({tv:'tv',drive:'drive',hello:'hello'}))document.getElementById(id).onclick=()=>setMode(m);
+
 const greet=()=>setMode('hello');canvas.addEventListener('pointerup',()=>{let now=performance.now();if(now-lastTouch<480)greet();lastTouch=now});canvas.addEventListener('dblclick',greet);
-function frame(now){let dt=Math.min((now-last)/1000,.05);last=now;if(!document.hidden)elapsed+=dt;if(returnAt&&elapsed>returnAt){returnAt=0;setMode('tv')}if(mode==='tv'&&!document.hidden){watchMs+=dt;if(watchMs>30*60)tvBroken=true}const d=canvas.clientWidth/window.innerWidth;if(canvas.width===0||Math.abs(canvas.width-canvas.clientWidth*devicePixelRatio)>10)resize();gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);scenery(elapsed);robot(elapsed);requestAnimationFrame(frame)}
+function frame(now){let dt=Math.min((now-last)/1000,.05);last=now;if(!document.hidden)elapsed+=dt;if(returnAt&&elapsed>returnAt){returnAt=0;setMode('tv')}const d=canvas.clientWidth/window.innerWidth;if(canvas.width===0||Math.abs(canvas.width-canvas.clientWidth*devicePixelRatio)>10)resize();gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);scenery(elapsed);robot(elapsed);requestAnimationFrame(frame)}
 window.addEventListener('resize',resize);resize();setMode('tv');requestAnimationFrame(frame);
 })();

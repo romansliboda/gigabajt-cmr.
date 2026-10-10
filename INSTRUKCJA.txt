@@ -1,10 +1,1 @@
-GIGABAJT — ROBOT 3D TEST 3
-
-To niezależne demo, nie pełna aplikacja CMR.
-
-Pliki do publikacji: index.html, robot3d.js.
-Po wypakowaniu prześlij oba pliki do głównego katalogu GitHub Pages.
-Uwaga: index.html zastąpi stronę aplikacji CMR w tym repozytorium, dopóki nie przywrócisz poprzedniego pliku!
-
-Test: telewizor, jazda, CMR, przywitanie po podwójnym stuknięciu, pokazowa pogoda.
-WebGL działa również offline z lokalnych plików. Grafika jest programowo modelowana i nie jest wierną kopią renderingu referencyjnego.
+Gigabajt robot 05 — wersja TESTOWA. Rozpakuj i wgraj index.html oraz robot3d.js do katalogu głównego repozytorium GitHub (tymczasowo zastąpi to główną stronę CMR). Test: podwójne stuknięcie = przywitanie; ruch i telewizor przyciskami. Nie zawiera aplikacji CMR.
