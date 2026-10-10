@@ -1,1 +1,4 @@
-CMR 10.6 TEST. Poprawiono tylko położenie nakładki śniegu na TV: usunięto przekoszenie, nadano niewielki obrót przeciwny, zmniejszono, wycentrowano względem czarnego ekranu. Oryginalny model GLB 12 i pozostałe funkcje CMR bez zmian. Wgrać wszystkie pliki do katalogu głównego repozytorium.
+Gigabajt CMR 10.7 TEST — poprawiono wyłącznie nakładkę śniegu TV w robot-scene.html.
+Śnieg węższy/niższy, przesunięty bliżej środka czarnego ekranu i obrócony o -2°.
+Model 3D 12 i pozostałe pliki aplikacji niezmienione względem 10.6.
+Wgraj zawartość ZIP do głównego katalogu repozytorium GitHub.
