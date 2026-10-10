@@ -1,1 +1,16 @@
-Gigabajt robot 05 — wersja TESTOWA. Rozpakuj i wgraj index.html oraz robot3d.js do katalogu głównego repozytorium GitHub (tymczasowo zastąpi to główną stronę CMR). Test: podwójne stuknięcie = przywitanie; ruch i telewizor przyciskami. Nie zawiera aplikacji CMR.
+GIGABAJT ROBOT 06 — TEST
+
+1. Rozpakuj ZIP.
+2. Otwórz folder Gigabajt_robot_06.
+3. Wgraj na GitHub do głównego katalogu repozytorium jego 5 plików:
+   index.html, app.js, style.css, glowa.png, telewizor.png.
+4. Po zatwierdzeniu zmian otwórz:
+   https://romansliboda.github.io/gigabajt-cmr./index.html?v=robot06
+
+UWAGA: To osobne demo — jego index.html zastąpi stronę aplikacji CMR,
+jesli wgrasz go w katalogu głównym. Nie kasuje zapisanych danych CMR.
+Aby zachować aplikację CMR, możesz wgrać te pliki do podfolderu robot06,
+a potem otworzyć: https://romansliboda.github.io/gigabajt-cmr./robot06/index.html
+
+Robot 06 to animacja 2.5D z oddzielnymi grafikami glowy i telewizora,
+a nie obracalny model geometryczny 3D. Ruch jest rzeczywisty na stronie.
