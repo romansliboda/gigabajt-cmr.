@@ -1,5 +1,5 @@
-const CACHE='gigabajt-cmr-v97';
-const FILES=['./index.html','./cmr-template-perfect.png','./icon-192.png','./icon-512.png','./manifest.webmanifest','./robot.css','./robot.js'];
+const CACHE='gigabajt-cmr-v98';
+const FILES=['./index.html','./cmr-template-perfect.png','./icon-192.png','./icon-512.png','./manifest.webmanifest','./robot.css','./robot.js','./robot-rain.webp','./robot-sun.webp','./robot-greet.webp'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('gigabajt-cmr-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch', event => {if(event.request.method!=='GET')return;
