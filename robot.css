@@ -1,14 +1,116 @@
-/* Gigabajt 9.8: renderowane sceny 3D tylko w pustej ramce Podgladu */
-#gb-robot-box{position:relative;width:100%;height:210px;overflow:hidden;border-radius:18px;background:#f8fbff;touch-action:manipulation;user-select:none;box-shadow:inset 0 0 0 1px #e9eef5;cursor:pointer}
-#gb-robot-box .gb-scene3d{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;overflow:hidden}
-#gb-robot-box .gb-scene3d.visible{opacity:1}
-#gb-robot-box .gb-scene3d img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 54%;filter:saturate(1.03);animation:gb-scene-breathe 6s ease-in-out infinite alternate}
-#gb-robot-box .gb-scene3d.rain img{object-position:center 52%}
-#gb-robot-box .gb-scene3d.sun img{object-position:center 52%}
-#gb-robot-box .gb-scene3d.greet img{object-position:center 52%}
-#gb-robot-box .gb-robot-dialog{position:absolute;left:50%;top:6px;transform:translateX(-50%);padding:7px 12px;border:1px solid #b8d6ff;background:#eaf5ff;color:#174572;border-radius:18px;font:700 12px/1.25 system-ui,sans-serif;box-shadow:0 3px 9px #20467b20;max-width:90%;text-align:center;opacity:0;transition:opacity .25s;z-index:5;pointer-events:none}
-#gb-robot-box .gb-robot-dialog.visible{opacity:1}
-#gb-robot-box .gb-demo-note{position:absolute;bottom:4px;right:8px;padding:3px 7px;border-radius:8px;background:#ffffffdd;color:#4d647c;font:10px system-ui,sans-serif;z-index:6}
-@keyframes gb-scene-breathe{from{transform:scale(1)}to{transform:scale(1.045)}}
-@media(max-width:420px){#gb-robot-box{height:192px}#gb-robot-box .gb-robot-dialog{font-size:11px}}
-@media(prefers-reduced-motion:reduce){#gb-robot-box .gb-scene3d img{animation:none}#gb-robot-box .gb-scene3d{transition:none}}
+:root{
+  --gb-bg:#fbfdff;
+  --gb-line:#e7edf5;
+  --gb-floor:#dfe8f4;
+  --gb-text:#17324d;
+  --gb-muted:#6e8197;
+  --gb-blue:#50b6ff;
+  --gb-dark:#101f34;
+  --gb-white:#ffffff;
+  --gb-tv:#ff9f2c;
+  --gb-tv-dark:#d87417;
+  --gb-green:#88c99e;
+  --gb-gray:#b8c2cf;
+}
+.gb-robot-widget{position:relative;height:220px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);box-shadow:inset 0 0 0 1px var(--gb-line);user-select:none;touch-action:manipulation}
+.gb-robot-widget *{box-sizing:border-box}
+.gb-robot-widget .gb-floor{position:absolute;left:34px;right:34px;bottom:36px;height:4px;border-radius:999px;background:linear-gradient(90deg,transparent 0%,var(--gb-floor) 10%,var(--gb-floor) 90%,transparent 100%)}
+.gb-robot-widget .gb-weather{position:absolute;right:18px;top:14px;display:flex;align-items:center;gap:6px;color:#47627d;font-weight:700;font-size:14px;z-index:5}
+.gb-robot-widget .gb-weather .gb-icon{font-size:18px}
+.gb-robot-widget .gb-bubble{position:absolute;left:50%;top:14px;transform:translateX(-50%) scale(.96);padding:10px 16px;max-width:72%;text-align:center;border-radius:18px;background:#eef6ff;border:1px solid #cfe0f3;color:#21476c;font:700 14px/1.25 system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .28s ease, transform .28s ease;z-index:10;box-shadow:0 8px 18px rgba(39,81,129,.12)}
+.gb-robot-widget .gb-bubble::after{content:"";position:absolute;left:50%;bottom:-9px;width:16px;height:16px;background:#eef6ff;border-right:1px solid #cfe0f3;border-bottom:1px solid #cfe0f3;transform:translateX(-50%) rotate(45deg)}
+.gb-robot-widget.is-greet .gb-bubble{opacity:1;transform:translateX(-50%) scale(1)}
+.gb-robot-widget .gb-scene{position:absolute;inset:0}
+.gb-robot-widget .gb-tv{position:absolute;right:48px;bottom:42px;width:76px;height:62px;border-radius:14px;background:linear-gradient(135deg,#ffb447 0%,var(--gb-tv) 55%,var(--gb-tv-dark) 100%);box-shadow:0 10px 18px rgba(255,165,44,.18)}
+.gb-robot-widget .gb-tv::before{content:"";position:absolute;left:10px;top:10px;width:44px;height:34px;border-radius:8px;background:linear-gradient(180deg,#d7f8ff 0%,#86d0ef 45%,#5286b6 100%);box-shadow:inset 0 0 0 2px rgba(30,51,77,.22), 0 0 24px rgba(104,204,255,.25)}
+.gb-robot-widget .gb-tv::after{content:"";position:absolute;right:12px;top:16px;width:6px;height:6px;border-radius:999px;background:#20364d;box-shadow:0 12px 0 #20364d,0 24px 0 #20364d}
+.gb-robot-widget .gb-tv .antenna{position:absolute;top:-18px;right:18px;width:2px;height:18px;background:#344961;transform:rotate(-28deg);transform-origin:bottom center}
+.gb-robot-widget .gb-tv .antenna::after{content:"";position:absolute;right:-10px;top:2px;width:2px;height:18px;background:#344961;transform:rotate(54deg);transform-origin:bottom center}
+.gb-robot-widget .gb-tv .leg{position:absolute;bottom:-7px;width:14px;height:7px;border-radius:0 0 10px 10px;background:#c97a1c}
+.gb-robot-widget .gb-tv .leg.l1{left:12px}.gb-robot-widget .gb-tv .leg.l2{right:12px}
+.gb-robot-widget .gb-tv.on::before{animation:gbTvFlicker 2.8s infinite alternate}
+.gb-robot-widget .gb-shadow{position:absolute;width:96px;height:18px;border-radius:50%;background:radial-gradient(circle at center, rgba(69,89,117,.18) 0%, rgba(69,89,117,.08) 55%, transparent 72%);filter:blur(2px)}
+.gb-robot-widget .gb-robot{position:absolute;left:82px;bottom:44px;width:88px;height:100px;transform-origin:50% 100%;z-index:3}
+.gb-robot-widget .gb-robot .head{position:absolute;left:14px;top:0;width:58px;height:52px;border-radius:20px;background:linear-gradient(145deg,#ffffff 0%,#f4f8ff 50%,#d6e3f0 100%);box-shadow:0 4px 10px rgba(35,61,90,.14)}
+.gb-robot-widget .gb-robot .head::before{content:"";position:absolute;inset:8px 7px 7px;border-radius:16px;background:linear-gradient(180deg,#0c1726 0%,#1a2f47 40%,#0f1621 100%)}
+.gb-robot-widget .gb-robot .face{position:absolute;left:8px;right:8px;top:8px;bottom:7px;border-radius:16px;overflow:hidden}
+.gb-robot-widget .gb-robot .eye{position:absolute;top:20px;width:12px;height:8px;border-radius:12px 12px 10px 10px;background:linear-gradient(180deg,#76e8ff 0%,#47b8ff 100%);box-shadow:0 0 10px rgba(80,182,255,.65);animation:gbBlink 5.6s infinite}
+.gb-robot-widget .gb-robot .eye.left{left:12px}.gb-robot-widget .gb-robot .eye.right{right:12px}
+.gb-robot-widget .gb-robot .mouth{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);width:16px;height:6px;border-bottom:2px solid #61d2ff;border-radius:0 0 16px 16px;opacity:.9}
+.gb-robot-widget .gb-robot .antenna{position:absolute;left:44px;top:-10px;width:3px;height:12px;background:#202d3e;border-radius:99px}
+.gb-robot-widget .gb-robot .antenna::after{content:"";position:absolute;left:-4px;top:-6px;width:10px;height:10px;border-radius:999px;background:#202d3e}
+.gb-robot-widget .gb-robot .ear{position:absolute;top:17px;width:10px;height:24px;border-radius:999px;background:linear-gradient(180deg,#3f5166 0%,#1d3147 100%)}
+.gb-robot-widget .gb-robot .ear.left{left:6px}.gb-robot-widget .gb-robot .ear.right{right:6px}
+.gb-robot-widget .gb-robot .body{position:absolute;left:21px;top:47px;width:46px;height:36px;border-radius:14px 14px 18px 18px;background:linear-gradient(145deg,#ffffff 0%,#eef5fd 55%,#d7e4f1 100%);box-shadow:0 6px 10px rgba(34,57,84,.12)}
+.gb-robot-widget .gb-robot .body::before{content:"";position:absolute;left:50%;top:10px;transform:translateX(-50%);width:14px;height:14px;border-radius:999px;background:radial-gradient(circle at 35% 35%,#c5f7ff 0%,#84d6ff 48%,#b9e2ff 50%,#d9efff 100%)}
+.gb-robot-widget .gb-robot .arm{position:absolute;top:52px;width:13px;height:34px;border-radius:999px;background:linear-gradient(180deg,#2f4256 0%,#1a2b3e 100%)}
+.gb-robot-widget .gb-robot .arm.left{left:16px;transform-origin:top center;animation:gbArmLeft 2.6s ease-in-out infinite alternate}
+.gb-robot-widget .gb-robot .arm.right{right:16px;transform-origin:top center;animation:gbArmRight 3.1s ease-in-out infinite alternate}
+.gb-robot-widget .gb-robot .arm::after{content:"";position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);width:12px;height:12px;border-radius:999px;background:#202f42}
+.gb-robot-widget .gb-robot .leg{position:absolute;bottom:2px;width:15px;height:22px;border-radius:999px;background:linear-gradient(180deg,#2f4256 0%,#1c2f45 100%)}
+.gb-robot-widget .gb-robot .leg.left{left:29px}.gb-robot-widget .gb-robot .leg.right{right:29px}
+.gb-robot-widget .gb-robot .wheel{position:absolute;bottom:-2px;width:20px;height:24px;border-radius:12px;background:linear-gradient(180deg,#24384f 0%,#111c2a 100%);box-shadow:inset 0 0 0 3px #3a5574}
+.gb-robot-widget .gb-robot .wheel::before{content:"";position:absolute;inset:4px;border-radius:8px;background:#3bc2ff;box-shadow:0 0 10px rgba(59,194,255,.4)}
+.gb-robot-widget .gb-robot .wheel.left{left:20px}.gb-robot-widget .gb-robot .wheel.right{right:20px}
+.gb-robot-widget .gb-robot .cmr-paper{position:absolute;right:-4px;bottom:18px;width:26px;height:32px;border-radius:4px 8px 4px 4px;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.09);border:1px solid #dfe7f0;opacity:0;transform:rotate(-8deg)}
+.gb-robot-widget .gb-robot .cmr-paper::before{content:"";position:absolute;right:-1px;top:-1px;border-style:solid;border-width:0 10px 10px 0;border-color:transparent #eaf2fb transparent transparent;border-top-right-radius:4px}
+.gb-robot-widget .gb-robot .cmr-paper::after{content:"";position:absolute;left:5px;top:8px;width:14px;height:2px;background:#c7d4e2;box-shadow:0 6px 0 #c7d4e2,0 12px 0 #c7d4e2}
+.gb-robot-widget .gb-robot .pencil{position:absolute;right:12px;bottom:26px;width:22px;height:4px;border-radius:999px;background:linear-gradient(90deg,#ffb533 0%,#ffa021 70%,#e77a12 100%);opacity:0;transform:rotate(-28deg)}
+.gb-robot-widget .gb-robot .pencil::after{content:"";position:absolute;right:-4px;top:-1px;border-left:6px solid #1b2d43;border-top:3px solid transparent;border-bottom:3px solid transparent}
+.gb-robot-widget .gb-robot.is-side{transform:scale(.92)}
+.gb-robot-widget .gb-robot.is-side .head{transform:perspective(80px) rotateY(-24deg)}
+.gb-robot-widget .gb-robot.is-side .face{clip-path:inset(0 7px 0 0 round 16px)}
+.gb-robot-widget .gb-robot.is-side .ear.right{opacity:.35}
+.gb-robot-widget .gb-robot.is-side .wheel.right{opacity:.5}
+.gb-robot-widget .gb-robot.is-front{transform:scale(1) translateY(-2px)}
+.gb-robot-widget .gb-robot.is-front .head{transform:none}
+.gb-robot-widget .gb-robot.is-work .cmr-paper,.gb-robot-widget .gb-robot.is-work .pencil{opacity:1}
+.gb-robot-widget .gb-robot.is-greet .arm.right{animation:gbWave .9s ease-in-out infinite alternate}
+.gb-robot-widget .gb-robot.is-greet .arm.left{animation:none;transform:rotate(-12deg)}
+.gb-robot-widget .gb-robot.is-greet .mouth{width:18px;height:8px;border-width:3px}
+.gb-robot-widget .gb-robot.is-tv{animation:gbSitBob 3s ease-in-out infinite}
+.gb-robot-widget .gb-robot.is-work{animation:gbReadMove 4.2s ease-in-out infinite alternate}
+.gb-robot-widget .gb-robot.is-work .head{animation:gbReadNod 1.1s ease-in-out infinite alternate}
+.gb-robot-widget .gb-robot.is-tv .head{animation:gbLookTV 4s ease-in-out infinite}
+.gb-robot-widget .gb-robot.is-tv .eye{animation-duration:4.8s}
+.gb-robot-widget .gb-small-chair{position:absolute;left:58px;bottom:40px;width:44px;height:30px;border-radius:8px;background:linear-gradient(180deg,#f1f6fc 0%,#dce6f1 100%);box-shadow:inset 0 0 0 2px #dde6f1}
+.gb-robot-widget .gb-small-chair::before{content:"";position:absolute;left:9px;right:9px;top:8px;height:8px;border-radius:999px;background:#eef4fb}
+.gb-robot-widget .gb-small-chair::after{content:"";position:absolute;left:12px;bottom:-8px;width:4px;height:8px;background:#d8e3ee;box-shadow:16px 0 0 #d8e3ee}
+.gb-robot-widget .gb-ambient-sun,.gb-robot-widget .gb-ambient-rain{position:absolute;left:22px;top:16px;opacity:0;transition:opacity .4s ease}
+.gb-robot-widget.weather-sun .gb-ambient-sun{opacity:1}.gb-robot-widget.weather-rain .gb-ambient-rain{opacity:1}
+.gb-robot-widget .gb-ambient-sun{display:flex;align-items:center;gap:10px}
+.gb-robot-widget .gb-ambient-sun .sun{width:26px;height:26px;border-radius:999px;background:radial-gradient(circle at 35% 35%,#fff3ac 0%,#ffd449 45%,#ffb421 100%);box-shadow:0 0 0 6px rgba(255,207,77,.15)}
+.gb-robot-widget .gb-ambient-sun .temp,.gb-robot-widget .gb-ambient-rain .temp{font-size:12px;font-weight:700;color:#60758d}
+.gb-robot-widget .gb-ambient-rain{display:flex;align-items:center;gap:10px}
+.gb-robot-widget .gb-ambient-rain .cloud{position:relative;width:32px;height:16px;background:#91a3b7;border-radius:999px}
+.gb-robot-widget .gb-ambient-rain .cloud::before,.gb-robot-widget .gb-ambient-rain .cloud::after{content:"";position:absolute;border-radius:50%;background:#91a3b7}
+.gb-robot-widget .gb-ambient-rain .cloud::before{width:18px;height:18px;left:4px;top:-8px}.gb-robot-widget .gb-ambient-rain .cloud::after{width:14px;height:14px;right:5px;top:-6px}
+.gb-robot-widget .gb-ambient-rain .drops{position:absolute;left:8px;top:18px;width:16px;height:16px}
+.gb-robot-widget .gb-ambient-rain .drops::before,.gb-robot-widget .gb-ambient-rain .drops::after{content:"";position:absolute;width:2px;height:10px;background:#59aef5;border-radius:999px;animation:gbRain 1s linear infinite}
+.gb-robot-widget .gb-ambient-rain .drops::before{left:2px}.gb-robot-widget .gb-ambient-rain .drops::after{right:2px;animation-delay:.35s}
+.gb-robot-widget .gb-ambient-rain .drops i{position:absolute;left:7px;top:0;width:2px;height:10px;background:#59aef5;border-radius:999px;animation:gbRain 1s linear infinite .18s}
+.gb-robot-widget .gb-umbrella{position:absolute;left:52%;top:68px;width:54px;height:26px;background:linear-gradient(180deg,#82c7ff 0%,#3ca3ff 100%);border-radius:54px 54px 8px 8px;transform:translateX(-50%) scale(.3);opacity:0;transform-origin:bottom center;transition:transform .35s ease, opacity .35s ease;z-index:8;box-shadow:0 6px 12px rgba(67,149,240,.22)}
+.gb-robot-widget .gb-umbrella::before{content:"";position:absolute;left:50%;top:24px;width:3px;height:28px;background:#334b67;transform:translateX(-50%)}
+.gb-robot-widget .gb-umbrella::after{content:"";position:absolute;left:50%;bottom:-7px;width:11px;height:11px;border-right:3px solid #334b67;border-bottom:3px solid #334b67;border-radius:0 0 10px 0;transform:translateX(1px)}
+.gb-robot-widget.is-greet.weather-rain .gb-umbrella{opacity:1;transform:translateX(-50%) scale(1)}
+.gb-robot-widget .gb-status{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font:600 11px/1 system-ui,sans-serif;color:#7f92a8;opacity:.85}
+@keyframes gbBlink{0%,45%,48%,100%{transform:scaleY(1)}46%,47%{transform:scaleY(.15)}}
+@keyframes gbArmLeft{from{transform:rotate(8deg)}to{transform:rotate(-8deg)}}
+@keyframes gbArmRight{from{transform:rotate(-4deg)}to{transform:rotate(10deg)}}
+@keyframes gbWave{from{transform:rotate(-18deg)}to{transform:rotate(30deg)}}
+@keyframes gbSitBob{0%,100%{transform:translateY(0) scale(.92)}50%{transform:translateY(-2px) scale(.92)}}
+@keyframes gbReadMove{0%{transform:translateX(0) scale(.92)}50%{transform:translateX(10px) scale(.92)}100%{transform:translateX(0) scale(.92)}}
+@keyframes gbReadNod{from{transform:perspective(80px) rotateY(-24deg) rotateZ(0)}to{transform:perspective(80px) rotateY(-22deg) rotateZ(3deg)}}
+@keyframes gbLookTV{0%,100%{transform:perspective(80px) rotateY(-24deg) rotateZ(0)}40%{transform:perspective(80px) rotateY(-18deg) rotateZ(-2deg)}70%{transform:perspective(80px) rotateY(-28deg) rotateZ(1deg)}}
+@keyframes gbRain{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+@keyframes gbTvFlicker{0%{filter:brightness(1)}25%{filter:brightness(1.08)}50%{filter:brightness(.96)}75%{filter:brightness(1.04)}100%{filter:brightness(1)}}
+@media (max-width: 480px){.gb-robot-widget{height:192px}.gb-robot-widget .gb-tv{right:26px;bottom:38px;transform:scale(.92)}.gb-robot-widget .gb-robot{left:66px;bottom:40px;transform:scale(.82)}.gb-robot-widget .gb-robot.is-front{transform:scale(.88) translateY(-2px)}.gb-robot-widget .gb-bubble{font-size:12px;max-width:78%}}
+@media (prefers-reduced-motion: reduce){.gb-robot-widget *{animation:none !important;transition:none !important}}
+
+/* Integracja CMR 9.9: mobilna scena robocika */
+#gb-robot-box.gb-robot-widget{width:100%;max-width:100%;height:202px}
+#gb-robot-box .gb-robot{transition:left 1.6s ease,bottom .4s ease,transform .45s ease}
+#gb-robot-box .gb-tv:not(.on)::before{background:linear-gradient(130deg,#283442,#101b26);box-shadow:inset 0 0 0 3px #152438}
+#gb-robot-box .gb-robot.is-side{transform:perspective(180px) rotateY(14deg) scale(.91)}
+#gb-robot-box .gb-robot.is-front{transform:perspective(180px) rotateY(0deg) scale(.96)}
+@media(max-width:480px){#gb-robot-box.gb-robot-widget{height:192px}#gb-robot-box .gb-tv{right:20px}#gb-robot-box .gb-robot.is-side{transform:perspective(180px) rotateY(14deg) scale(.78)}#gb-robot-box .gb-robot.is-front{transform:scale(.85)}}
