@@ -1,10 +1,1 @@
-GIGABAJT MODEL 3D 12 — TEST GITHUB PAGES
-
-1. Rozpakuj ZIP.
-2. Wgraj pliki index.html, Gigabajt_glowa_i_telewizor_12.glb i INSTRUKCJA.txt do katalogu glownego repozytorium.
-3. Zatwierdz zmiany (Commit changes).
-4. Otworz https://romansliboda.github.io/gigabajt-cmr./index.html?v=robot12
-
-UWAGA: To osobny podglad 3D, nie cala aplikacja CMR. Wgranie index.html do glownego katalogu zastapi widoczna strone aplikacji CMR, dopoki nie przywrocisz poprzedniego index.html.
-
-Podglad dziala bez polaczenia z zewnetrznymi serwisami: biblioteka Plotly jest wbudowana w index.html. Model GLB dolaczony oddzielnie.
+CMR 10.0 TEST + Gigabajt 3D 12. Rozpakuj ZIP, wgraj PLIKI do katalogu głównego repozytorium na GitHub, Commit changes. Strona: https://romansliboda.github.io/gigabajt-cmr./index.html?v=100 . UWAGA: przed podmianą index.html zachowaj jego obecną kopię. Pola CMR zachowano, model GLB oryginalny jest załączony. Nowa scena robot-scene.html w zakładce Podgląd. TV włącza niebieski ekran po około 1,5 sekundy. Animacji chodzenia jeszcze nie ma.
