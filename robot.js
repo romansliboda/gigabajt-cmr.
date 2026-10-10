@@ -1,4 +1,4 @@
-/* Gigabajt Robot v9.6 — podgląd only, offline-friendly. */
+/* Gigabajt Robot v9.7 — podgląd only, offline-friendly. */
 (function(){
 'use strict';
 function init(){
@@ -16,19 +16,19 @@ function init(){
       <div class="gb-desk" aria-hidden="true"></div>
       <div class="gb-tv-zone" aria-hidden="true">
         <div class="gb-sofa"></div>
-        <div class="gb-tv" id="gb-tv"><div class="gb-tv-screen"></div><div class="gb-tv-knobs"></div></div>
+        <div class="gb-tv" id="gb-tv"><div class="gb-tv-screen"><div class="gb-tv-cartoon"><i></i><b></b></div><div class="gb-tv-scan"></div></div><div class="gb-tv-knobs"></div></div>
       </div>
       <div class="gb-robot side right idle" id="gb-robot">
         <div class="gb-shadow"></div>
         <div class="gb-ant"></div>
-        <div class="gb-head">
+        <div class="gb-head"><div class="gb-head-shine"></div><div class="gb-side-panel"></div>
           <div class="gb-face">
             <div class="gb-front-eyes"><i></i><i></i></div>
             <div class="gb-side-eye"></div>
             <div class="gb-shades"></div>
           </div>
         </div>
-        <div class="gb-body">
+        <div class="gb-body"><div class="gb-body-shine"></div>
           <div class="gb-core"></div>
           <div class="gb-arm left"></div>
           <div class="gb-arm right"></div>
@@ -36,7 +36,7 @@ function init(){
           <div class="gb-leg right"></div>
           <div class="gb-wheel left"></div>
           <div class="gb-wheel right"></div>
-          <div class="gb-paper"><span>CMR</span></div>
+          <div class="gb-paper"><span>CMR</span><i></i><i></i><i></i></div>
           <div class="gb-pen"></div>
           <div class="gb-umbrella"></div>
           <div class="gb-scarf"></div>
@@ -49,8 +49,9 @@ function init(){
   const weatherHint=root.querySelector('#gb-weather-hint');
   const tv=root.querySelector('#gb-tv');
 
-  let timer=null, returnTimer=null, lastTap=0, paused=false, currentStep=0;
-  let currentWeather={type:'rain',temp:10,text:'Co słychać? Dziś deszcz i zimno — 10°C.'};
+  let timer=null, returnTimer=null, greetTimer=null, lastTap=0, paused=false, currentStep=0;
+  // Pogoda pokazowa: nie udajemy rzeczywistych danych bez połączenia.
+  let currentWeather={type:'cloud',temp:15,text:'Cześć! Co słychać? Pogoda jest teraz w trybie pokazowym.'};
 
   const steps=[
     {x:74, dir:'left', pose:'tv', duration:4600},
@@ -73,7 +74,7 @@ function init(){
   function applyWeatherVisual(){
     robot.classList.remove('weather-rain','weather-cold','weather-sun','weather-cloud');
     weatherHint.className='gb-weather-hint';
-    weatherHint.textContent='';
+    weatherHint.textContent='🌤️ Pogoda: demo';
     const t=Number(currentWeather.temp)||0;
     const kind=currentWeather.type;
     if(kind==='sun' || t>=22){
@@ -103,7 +104,7 @@ function init(){
     }
     robot.classList.add('side',pose,'idle');
     robot.style.left=x+'%';
-    tv.classList.add('on');
+    tv.classList.toggle('on',pose==='tv');
   }
 
   function playStep(index){
@@ -125,7 +126,8 @@ function init(){
     applyWeatherVisual();
     setPose('greet',45,'right');
     showBubble(w.text,5.2);
-    setTimeout(()=>{
+    clearTimeout(greetTimer);
+    greetTimer=setTimeout(()=>{
       paused=false;
       bubble.classList.remove('visible');
       playStep(currentStep);
