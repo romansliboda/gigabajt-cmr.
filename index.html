@@ -148,7 +148,23 @@ body.gb-dark .cmr-archive-card{background:#354154;color:#f1f5fa;border-color:#84
 .cmr-history-actions button{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:10px;padding:0;margin:0;font-size:21px;background:#eaf3ff;color:#144f88;border:1px solid #9ab8dc;cursor:pointer}
 .cmr-history-actions button.cmr-history-trash{background:#fff0f0;color:#a72132;border-color:#e2a5ab}
 .cmr-history-actions button:focus-visible{outline:3px solid #316fc2;outline-offset:2px}
-</style></head><body><header><div class="header-top"><div><div class="header-title"><span class="truck-wrap"><span id="truckIcon" class="truck-emoji">🚚<span class="truck-exhaust" aria-hidden="true"><i></i><i></i><i></i></span></span></span><h1>Gigabajt CMR 8.9</h1></div><p>List przewozowy · bez internetu · Android</p></div><div id="headerClock" class="header-clock" aria-label="Zegar"><span>--:--</span><small>czas</small></div><button class="text-settings-open" type="button" onclick="openAppSettings()" aria-label="Ustawienia">⚙️<span id="topSettingsCaption">Ustawienia</span></button></div></header><div class="wrap"><nav class="tabs"><button id="tab-form" class="active" onclick="showTab('form')">Nowy CMR</button><button id="tab-history" onclick="showTab('history')">Historia</button><button id="tab-preview" onclick="showTab('preview')">Podgląd</button></nav><div id="form" class="panel"><div class="banner">Dane zapisują się w pamięci telefonu. PDF utworzysz przez opcję „Drukuj / Zapisz jako PDF”.</div><h2>Dokument CMR</h2><div class="grid"><div><label>Numer CMR</label><input id="num" placeholder="001" inputmode="numeric"><div class="cmr-num-mode"><span class="cmr-mode-text" id="numManualLabel">Ręcznie</span><label class="cmr-switch" aria-label="Automatyczna numeracja CMR"><input id="cmrAutoMode" type="checkbox" onchange="changeCMRMode(this.checked)"><span class="cmr-switch-track"></span></label><span class="cmr-mode-text" id="numAutoLabel">Automatycznie</span></div><div class="hint" id="cmrModeHint">W trybie automatycznym numer rośnie po zatwierdzeniu CMR. W ręcznym wpisujesz go samodzielnie.</div></div><div><label>Data wystawienia</label><input id="issued" type="date"></div><div class="full"><label>Miejsce wystawienia</label><input id="place" placeholder="np. Wrocław"></div></div>
+
+/* 9.0: akcje WEWNATRZ kafelka, obok siebie, bez zagniezdzania przyciskow */
+.cmr-history-row{display:flex;align-items:stretch;gap:0;margin:12px 0;border:2px solid #aeb6c1;border-left:9px solid #8993a3;border-radius:16px;box-shadow:0 2px 8px #14283a14;background:#f3f5f7;overflow:hidden}
+.cmr-history-row.completed{border-color:#4eab73;border-left-color:#188548;background:#e5f7e9}
+.cmr-history-row .cmr-archive-card{margin:0;border:0;border-radius:0;border-left:0;box-shadow:none;min-width:0;flex:1;padding:13px 7px;gap:8px;background:transparent}
+.cmr-history-row .cmr-archive-card.completed{background:transparent;border:0;color:#133e25}
+.cmr-history-row .archive-paper{width:43px;height:56px}
+.cmr-history-row .archive-card-text strong{font-size:15px}
+.cmr-history-actions{display:flex;flex-direction:row;gap:5px;justify-content:flex-end;align-items:center;flex:none;padding:0 8px 0 1px}
+.cmr-history-actions button{width:36px;height:40px;font-size:19px;border-radius:9px;padding:0;display:flex;align-items:center;justify-content:center;margin:0;background:#eaf3ff;color:#144f88;border:1px solid #9ab8dc;cursor:pointer}
+.cmr-history-actions button.cmr-history-trash{background:#fff0f0;color:#a72132;border-color:#e2a5ab}
+.cmr-history-actions button:disabled{opacity:.55}
+.cmr-history-actions button:focus-visible{outline:3px solid #316fc2;outline-offset:2px}
+body.gb-dark .cmr-history-row{background:#354154;border-color:#8492a5;border-left-color:#aab6c5}
+body.gb-dark .cmr-history-row.completed{background:#234737;border-color:#54a877}
+@media(max-width:410px){.cmr-history-row .archive-paper{width:36px;height:48px}.cmr-history-row .cmr-archive-card{padding:10px 4px;gap:5px}.cmr-history-row .archive-card-text strong{font-size:14px}.cmr-history-row .archive-card-text span{font-size:11px}.cmr-history-actions{gap:3px;padding-right:5px}.cmr-history-actions button{width:32px;height:35px;font-size:17px}}
+</style></head><body><header><div class="header-top"><div><div class="header-title"><span class="truck-wrap"><span id="truckIcon" class="truck-emoji">🚚<span class="truck-exhaust" aria-hidden="true"><i></i><i></i><i></i></span></span></span><h1>Gigabajt CMR 9.0</h1></div><p>List przewozowy · bez internetu · Android</p></div><div id="headerClock" class="header-clock" aria-label="Zegar"><span>--:--</span><small>czas</small></div><button class="text-settings-open" type="button" onclick="openAppSettings()" aria-label="Ustawienia">⚙️<span id="topSettingsCaption">Ustawienia</span></button></div></header><div class="wrap"><nav class="tabs"><button id="tab-form" class="active" onclick="showTab('form')">Nowy CMR</button><button id="tab-history" onclick="showTab('history')">Historia</button><button id="tab-preview" onclick="showTab('preview')">Podgląd</button></nav><div id="form" class="panel"><div class="banner">Dane zapisują się w pamięci telefonu. PDF utworzysz przez opcję „Drukuj / Zapisz jako PDF”.</div><h2>Dokument CMR</h2><div class="grid"><div><label>Numer CMR</label><input id="num" placeholder="001" inputmode="numeric"><div class="cmr-num-mode"><span class="cmr-mode-text" id="numManualLabel">Ręcznie</span><label class="cmr-switch" aria-label="Automatyczna numeracja CMR"><input id="cmrAutoMode" type="checkbox" onchange="changeCMRMode(this.checked)"><span class="cmr-switch-track"></span></label><span class="cmr-mode-text" id="numAutoLabel">Automatycznie</span></div><div class="hint" id="cmrModeHint">W trybie automatycznym numer rośnie po zatwierdzeniu CMR. W ręcznym wpisujesz go samodzielnie.</div></div><div><label>Data wystawienia</label><input id="issued" type="date"></div><div class="full"><label>Miejsce wystawienia</label><input id="place" placeholder="np. Wrocław"></div></div>
 <div class="actions"><button type="button" class="secondary" onclick="resetCMRNumber()">↺ Reset numeracji CMR</button></div><h3>1. Nadawca</h3><label>Nazwa i pełny adres</label><textarea id="sender" placeholder="Firma, ulica, kod, miasto, kraj"></textarea><button type="button" class="secondary gps-load-btn" id="gpsLoadingButton" onclick="findLoadingCompany()">📍 GPS — znajdź miejsce / nadawcę</button><div id="gpsLoadingStatus" class="hint" role="status" aria-live="polite"></div><div id="gpsLoadingChoices" class="gps-company-list hidden"></div><h3>2. Odbiorca</h3><label>Nazwa i pełny adres</label><textarea id="receiver"></textarea><h3>3–4. Dostawa i załadunek</h3><div class="grid"><div><label>3. Miejsce dostawy</label><input id="delivery"></div><div><label>4. Miejsce załadunku</label><input id="loading"></div><div><label>Data załadunku</label><input id="loaded" type="date"></div><div><label>Planowana data dostawy (pomocnicza)</label><input id="deliveryDate" type="date"></div></div><h3>5–6. Dokumenty i oznaczenia</h3><label>5. Załączone dokumenty</label><textarea id="documents"></textarea><label>6. Znaki i numery</label><textarea id="marks"></textarea>
 <h3>7–12. Towary</h3><div id="goods"></div><button class="secondary" type="button" onclick="addGood()">+ Dodaj pozycję towaru</button><h3>13–14. Instrukcje</h3><label>13. Instrukcje nadawcy</label><textarea id="instructions"></textarea><label>14. Postanowienia dotyczące przewoźnego</label><textarea id="freight"></textarea><h3>16. Przewoźnik</h3><label>Pełna nazwa i adres przewoźnika</label><textarea id="carrier"></textarea><div class="grid"><div><label>Ciągnik – numer rejestracyjny</label><input id="truck"></div><div><label>Naczepa – numer rejestracyjny</label><input id="trailer"></div></div><h3>17–19. Pozostałe informacje</h3><label>17. Kolejni przewoźnicy</label><textarea id="nextCarriers"></textarea><label>18. Zastrzeżenia przewoźnika</label><textarea id="reservations"></textarea><label>19. Postanowienia specjalne</label><textarea id="special"></textarea><h3>21–24. Dane końcowe</h3><label>21. Miejsce i data wystawienia (automatycznie z nagłówka)</label><label>22. Podpis i stempel nadawcy — dane firmy (opcjonalnie)</label><textarea id="sender22" placeholder="Wpisz dane tylko jeśli nadawca nie stawia pieczątki. Zostaw miejsce na podpis."></textarea><div class="sig-inline"><button class="secondary" type="button" onclick="openSignature('sender22Sig','Podpis nadawcy – pole 22')">✍️ Podpis 22</button><button class="danger" type="button" onclick="clearSignature('sender22Sig')">Usuń podpis 22</button><span id="sender22SigState" class="sig-badge">Brak podpisu</span></div><div class="sig-inline"><button type="button" class="secondary" onclick="openSigMove('sender22Sig')">↔️ Przesuń podpis 22 palcem</button></div><div class="sig-size"><span>Wielkość podpisu 22:</span><button type="button" class="secondary" onclick="changeSigSize('sender22Sig',-10)">−</button><input type="range" min="-80" max="100" step="5" value="0" id="sender22SigSize" oninput="changeSigSize('sender22Sig',Number(this.value),true)"><button type="button" class="secondary" onclick="changeSigSize('sender22Sig',10)">+</button><b id="sender22SigSizeLabel">0%</b></div><label>23. Dodatkowe dane przewoźnika / kierowcy</label><textarea id="carrier23"></textarea><div class="sig-inline"><button class="secondary" type="button" onclick="openSignature('carrier23Sig','Podpis przewoźnika / kierowcy – pole 23')">✍️ Podpis 23</button><button class="danger" type="button" onclick="clearSignature('carrier23Sig')">Usuń podpis 23</button><span id="carrier23SigState" class="sig-badge">Brak podpisu</span></div><div class="sig-inline"><button type="button" class="secondary" onclick="openSigMove('carrier23Sig')">↔️ Przesuń podpis 23 palcem</button></div><div class="sig-size"><span>Wielkość podpisu 23:</span><button type="button" class="secondary" onclick="changeSigSize('carrier23Sig',-10)">−</button><input type="range" min="-80" max="100" step="5" value="0" id="carrier23SigSize" oninput="changeSigSize('carrier23Sig',Number(this.value),true)"><button type="button" class="secondary" onclick="changeSigSize('carrier23Sig',10)">+</button><b id="carrier23SigSizeLabel">0%</b></div><div id="formReceiver24Controls" class="hidden"><h3>24. Odbiorca — podpis</h3><div class="sig-inline"><button class="secondary" type="button" onclick="openSignature('receiver24Sig','Podpis odbiorcy – pole 24')">✍️ Podpis 24 – odbiorca</button><button class="danger" type="button" onclick="clearSignature('receiver24Sig')">Usuń podpis 24</button><span id="receiver24SigState" class="sig-badge">Brak podpisu</span></div><div class="sig-inline"><button type="button" class="secondary" onclick="openSigMove('receiver24Sig')">↔️ Przesuń podpis 24 palcem</button></div><div class="sig-size"><span>Wielkość podpisu 24:</span><button type="button" class="secondary" onclick="changeSigSize('receiver24Sig',-10)">−</button><input type="range" min="-80" max="100" step="5" value="0" id="receiver24SigSize" oninput="changeSigSize('receiver24Sig',Number(this.value),true)"><button type="button" class="secondary" onclick="changeSigSize('receiver24Sig',10)">+</button><b id="receiver24SigSizeLabel">0%</b></div></div><label>Uwagi pomocnicze (nie są drukowane na CMR)</label><textarea id="notes"></textarea><p id="validation" class="error"></p><div class="actions"><button class="primary" onclick="saveRecord()">💾 Zapisz CMR</button><button class="secondary" onclick="showTab('preview')">👁 Podgląd</button><button class="secondary" onclick="printCMR()">🖨 PDF / Drukuj</button><button class="danger" onclick="newRecord()">Nowy pusty</button></div></div>
 <div class="panel"><h2>📷 Fotografia dokumentu</h2><p class="hint">Zrób zdjęcie papierowej CMR i zapisz je w archiwum w zakładce Historia.</p><button type="button" class="secondary" onclick="openCameraForCMR()">📷 Zrób zdjęcie CMR</button><button type="button" class="secondary" onclick="locateForCMR()">📍 Pobierz lokalizację (GPS)</button><p id="gpsResult" class="hint" aria-live="polite"></p><input class="hidden" id="cmrCameraInput" type="file" accept="image/*" capture="environment" onchange="saveCMRPhoto(event)"></div><div id="formLivePreview" class="panel cmr-section"><h2>Podgląd wypełnionej CMR</h2><div id="livePreview"></div></div><div id="history" class="panel hidden"><h2>Historia CMR</h2><p class="hint">Wszystkie dokumenty są przechowywane lokalnie na tym urządzeniu. Odinstalowanie aplikacji lub wyczyszczenie danych może je usunąć.</p><div class="actions"><button class="secondary" onclick="exportData()">Eksportuj kopię danych</button><button class="secondary" onclick="document.getElementById('importfile').click()">Importuj kopię danych</button><input class="hidden" id="importfile" type="file" accept="application/json" onchange="importData(event)"></div><div id="recordList"></div><h3>📷 Archiwum zdjęć CMR</h3><p class="hint">Zdjęcia zapisane są lokalnie na tym telefonie. Możesz je pobierać i usuwać. Pełna kopia JSON z ustawień nie obejmuje fotografii — pobierz ważne zdjęcia osobno.</p><button type="button" class="secondary" onclick="openCameraForCMR()">📷 Zrób zdjęcie CMR</button><div id="photoArchive" class="photo-archive"></div></div>
@@ -179,7 +195,7 @@ body.gb-dark .cmr-archive-card{background:#354154;color:#f1f5fa;border-color:#84
 <div id="settingsNumbering" class="settings-page hidden"><button class="secondary settings-back" onclick="showSettingsPage('home')">← Wróć</button><h3>🔢 Numeracja CMR</h3><p id="numberSettingsInfo" class="hint"></p><button class="secondary" onclick="setNumberingModeFromSettings(true)">Automatycznie</button><button class="secondary" onclick="setNumberingModeFromSettings(false)">Ręcznie</button><button class="danger" onclick="resetCMRNumber();updateNumberingInfo()">Resetuj licznik (od 001)</button><p class="hint">Reset nie usuwa historii dokumentów. Nowy numer będzie widoczny przy tworzeniu nowej CMR.</p></div>
 <div id="settingsPermissions" class="settings-page hidden"><button class="secondary settings-back" onclick="showSettingsPage('home')">← Wróć</button><h3>🔐 Uprawnienia</h3><p class="hint">Przełączniki sterują funkcjami w Gigabajt CMR. Zezwolenie systemowe Androida pojawi się dopiero wtedy, kiedy użyjesz odpowiedniej funkcji. Możesz je też zmienić w ustawieniach telefonu.</p><div class="dt-card"><strong>📷 Aparat i zdjęcia CMR</strong><label class="dt-switchline"><input id="permCamera" type="checkbox" onchange="setAppPermission('camera',this.checked)"><span>Włącz fotografowanie dokumentów</span></label><p class="hint">Zdjęcia trafiają do lokalnego archiwum zdjęć CMR w Historii. Aplikacja nie wysyła ich na serwer.</p></div><div class="dt-card"><strong>📍 Lokalizacja</strong><label class="dt-switchline"><input id="permLocation" type="checkbox" onchange="setAppPermission('location',this.checked)"><span>Włącz pobieranie pozycji GPS na żądanie</span></label><p class="hint">Pozycja jest pobierana tylko po dotknięciu przycisku „Pobierz lokalizację” i pokazuje współrzędne, nie adres. Nie śledzi trasy. Za Twoją zgodą można znaleźć pobliską firmę i zaproponować jej dane do rubryki 1 — Nadawca. Do wyszukiwania firm potrzebny jest internet (OpenStreetMap).</p></div><div class="dt-card"><strong>🔔 Powiadomienia</strong><label class="dt-switchline"><input id="permNotifications" type="checkbox" onchange="setAppPermission('notifications',this.checked)"><span>Zezwól na powiadomienia o zapisaniu zdjęcia</span></label><p id="notificationPermissionStatus" class="hint"></p></div><button class="primary" onclick="closeAppSettings()">Gotowe</button></div>
 <div id="settingsAbout" class="settings-page hidden"><button class="secondary settings-back" onclick="showSettingsPage('home')">← Wróć</button>
-<div class="about-hero"><div class="about-truck" aria-hidden="true">🚛</div><h3>Gigabajt CMR</h3><p>Elektroniczny asystent listów przewozowych</p><span class="about-version">Wersja 8.9</span></div>
+<div class="about-hero"><div class="about-truck" aria-hidden="true">🚛</div><h3>Gigabajt CMR</h3><p>Elektroniczny asystent listów przewozowych</p><span class="about-version">Wersja 9.0</span></div>
 <div class="about-details">
 <div class="about-line"><span aria-hidden="true">👤</span><div><strong>Pomysłodawca i twórca projektu</strong><small>Roman Sliboda</small></div></div>
 <div class="about-line"><span aria-hidden="true">🚚</span><div><strong>Przeznaczenie</strong><small>Kierowcy i przewoźnicy międzynarodowi</small></div></div>
@@ -330,15 +346,121 @@ function deleteRecord(id){
  if(archiveId===id)archiveId=null;
  renderHistory();toast(name+' usunięta z Historii. Plik PDF w telefonie pozostaje.');
 }
-function saveArchiveToPhone(id){
- const d=records().find(r=>r.id===id);if(!d){toast('Nie znaleziono CMR');return}
- // Ten sam, sprawdzony układ wydruku. Android/Chrome pozwoli wybrać „Zapisz jako PDF” i Pobrane.
- const html=cmrHtml(d);
- if(window.AndroidCMR&&window.AndroidCMR.printCMR){window.AndroidCMR.printCMR(html);toast('Wybierz „Zapisz jako PDF”, a następnie folder Pobrane.');return}
- const w=window.open('','_blank');if(!w){toast('Zezwól przeglądarce na otwarcie okna wydruku');return}
- w.document.write(html);w.document.close();
- setTimeout(()=>{try{w.focus();w.print()}catch(e){toast('Nie udało się otworzyć zapisu PDF')}},700);
- toast('W drukowaniu wybierz „Zapisz jako PDF” i zapisz plik do Pobranych.');
+// 9.0: offline PDF download using the existing, unchanged CMR sheet renderer.
+// Rasterize each page with the Chromium SVG foreignObject renderer, then create
+// a standards-compliant PDF with one JPEG image per page. No server or CDN.
+const cmrPdfAscii=new TextEncoder();
+function pdfImageDocument(jpegs){
+ const items=[],parts=[],encoder=cmrPdfAscii;
+ let length=0;
+ const add=(v)=>{const bytes=typeof v==='string'?encoder.encode(v):v;parts.push(bytes);length+=bytes.length};
+ const offsets=[0];
+ function obj(id,head,body){offsets[id]=length;add(id+' 0 obj\n'+head);if(body){add('\nstream\n');add(body);add('\nendstream')}add('\nendobj\n')}
+ add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+ const n=jpegs.length;const catalog=1,pages=2;
+ obj(catalog,'<</Type /Catalog /Pages 2 0 R>>');
+ obj(pages,`<</Type /Pages /Count ${n} /Kids [${jpegs.map((_,i)=>3+i*3+' 0 R').join(' ')}]>>`);
+ for(let i=0;i<n;i++){
+  const pid=3+i*3,imgid=pid+1,cid=pid+2,{bytes,width,height}=jpegs[i];
+  obj(pid,`<</Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources <</XObject <</Im${i} ${imgid} 0 R>>>> /Contents ${cid} 0 R>>`);
+  obj(imgid,`<</Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${bytes.length}>>`,bytes);
+  const command=encoder.encode(`q 595.28 0 0 841.89 0 0 cm /Im${i} Do Q\n`);
+  obj(cid,`<</Length ${command.length}>>`,command);
+ }
+ const xref=length;add(`xref\n0 ${3+n*3}\n0000000000 65535 f \n`);
+ for(let i=1;i<3+n*3;i++)add(String(offsets[i]).padStart(10,'0')+' 00000 n \n');
+ add(`trailer\n<</Size ${3+n*3} /Root 1 0 R>>\nstartxref\n${xref}\n%%EOF`);
+ return new Blob(parts,{type:'application/pdf'});
+}
+function dataUrlBytes(uri){const raw=atob(uri.split(',')[1]);const buf=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)buf[i]=raw.charCodeAt(i);return buf}
+async function pdfTemplateData(){
+ if(window.gbCmrTemplateData)return window.gbCmrTemplateData;
+ const response=await fetch('./cmr-template-perfect.png');if(!response.ok)throw Error('Brak szablonu CMR');
+ const blob=await response.blob();const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(blob)});
+ window.gbCmrTemplateData=data;return data;
+}
+async function pdfImageLoad(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('Nie można wczytać obrazu PDF'));img.src=src})}
+async function imagePDFPage(d,index,template){
+ const width=1055,height=1491;
+ const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+ const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);
+ const background=await pdfImageLoad(template);
+ const hues=[0,225,170,75],sats=[1,1.25,1.25,1.2];
+ ctx.save();ctx.filter=index?`hue-rotate(${hues[index]}deg) saturate(${sats[index]})`:'none';
+ ctx.drawImage(background,0,0,width,height);ctx.restore();
+ const sheet=document.createElement('div');sheet.innerHTML=cmrSheet(d,index);
+ const entries=sheet.querySelectorAll('.cmr-overlay .ov');
+ const wrapLine=(line,maxWidth)=>{
+  const words=line.split(/\s+/),out=[];let current='';
+  for(const word of words){const candidate=current?current+' '+word:word;
+   if(ctx.measureText(candidate).width>maxWidth&&current){out.push(current);current=word}else current=candidate;
+  }
+  out.push(current);return out;
+ };
+ for(const entry of entries){
+  const x=parseFloat(entry.style.left)*width/100,y=parseFloat(entry.style.top)*height/100;
+  const w=parseFloat(entry.style.width)*width/100,h=parseFloat(entry.style.height)*height/100;
+  if(!Number.isFinite(x+y+w+h))continue;
+  if(entry.classList.contains('sig-full')){
+   const item=entry.querySelector('img');if(!item)continue;
+   try{
+    const img=await pdfImageLoad(item.getAttribute('src'));
+    const scale=String(item.style.width||'100%');
+    const iw=w*parseFloat(scale)/100,ih=h*parseFloat(item.style.height||'100%')/100;
+    const cx=x+w*parseFloat(item.style.left||'50%')/100,cy=y+h*parseFloat(item.style.top||'50%')/100;
+    // Position of signature is centered on its anchor; clip to its box.
+    ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+    ctx.drawImage(img,cx-iw/2,cy-ih/2,iw,ih);ctx.restore();
+   }catch(e){console.warn('PDF signature could not be drawn',e)}
+   continue;
+  }
+  const content=entry.textContent||'';if(!content.trim())continue;
+  const savedFont=parseFloat(entry.style.fontSize);
+  let fontsize=Number.isFinite(savedFont)?savedFont*1.33:(entry.classList.contains('narrow')?12:13);
+  const weight=entry.style.fontWeight||'400';
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.fillStyle='#171717';
+  ctx.font=`${weight} ${fontsize}px Arial,sans-serif`;
+  const lines=content.split('\n').flatMap(line=>wrapLine(line,w-3));
+  const lineHeight=fontsize*1.16;
+  const totalHeight=lines.length*lineHeight;
+  // Like the normal preview, fit long content into its box.
+  while(fontsize>7 && totalHeight*(fontsize/(Number.isFinite(savedFont)?savedFont*1.33:entry.classList.contains('narrow')?12:13))>h){fontsize--;ctx.font=`${weight} ${fontsize}px Arial,sans-serif`}
+  const lh=fontsize*1.16;
+  const middle=entry.classList.contains('goods-vmid')||entry.classList.contains('box23');
+  let yy=y+(middle?Math.max(0,(h-lines.length*lh)/2):0)+fontsize;
+  for(const line of lines){
+   if(yy>y+h)break;
+   let xx=x+1;if(entry.classList.contains('center'))xx=x+(w-ctx.measureText(line).width)/2;
+   ctx.fillText(line,xx,yy);yy+=lh;
+  }
+  ctx.restore();
+ }
+ if(index>0){
+  const titles=[null,['2','Egzemplarz dla odbiorcy','Exemplar für den Empfänger','Copy for consignee'],['3','Egzemplarz dla przewoźnika','Exemplar für den Frachtführer','Copy for carrier'],['4','Kopia','Kopie','Copy']];
+  const col=index===1?'#157eae':index===2?'#268351':'#333';
+  ctx.fillStyle=col;ctx.font='bold 30px Arial';ctx.fillText(titles[index][0],45,32);
+  ctx.font='11px Arial';titles[index].slice(1).forEach((line,i)=>ctx.fillText(line,84,14+i*12));
+ }
+ return {bytes:dataUrlBytes(canvas.toDataURL('image/jpeg',.93)),width,height};
+}
+async function saveArchiveToPhone(id){
+ const d=records().find(r=>r.id===id);if(!d){toast(archiveTr('Nie znaleziono CMR'));return}
+ const button=document.querySelector('.cmr-history-actions button[data-download-id="'+CSS.escape(String(id))+'"]');
+ if(button?.disabled)return;
+ if(button)button.disabled=true;
+ toast(archiveTr('Przygotowywanie PDF…'));
+ try{
+  const template=await pdfTemplateData();const indices=selectedPrintCopies();
+  const images=[];for(const index of indices)images.push(await imagePDFPage(d,index,template));
+  const blob=pdfImageDocument(images);
+  const url=URL.createObjectURL(blob);
+  const number=String(d.num||'bez_numeru').replace(/[^a-zA-Z0-9_-]/g,'_');
+  const a=document.createElement('a');a.href=url;a.download='CMR_'+number+'.pdf';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+  toast(archiveTr('PDF wysłany do Pobranych telefonu'));
+ }catch(err){console.error('CMR PDF download failed',err);toast(archiveTr('Nie udało się utworzyć PDF')+': '+(err?.message||''));}
+ finally{if(button)button.disabled=false}
 }
 function renderHistory(){
  const rr=records();
@@ -347,7 +469,7 @@ function renderHistory(){
   const stage=archiveTr(completed?'Gotowa do wydruku / zapisu PDF':legacy?'Starszy zapis — podgląd':'Gotowa do podpisu odbiorcy');
   const details=esc(r.issued||'')+' · '+esc(r.loading||'?')+' → '+esc(r.delivery||'?');
   const noNum=archiveTr('bez numeru');const id=JSON.stringify(String(r.id)).replace(/</g,'\u003c').replace(/'/g,'\u0027');
-  return `<div class="cmr-history-row"><button type="button" class="cmr-archive-card ${completed?'completed':''}" onclick='openArchive(${id})' aria-label="${archiveTr('Otwórz CMR')} ${esc(r.num||noNum)}: ${stage}"><span class="archive-paper" aria-hidden="true"><span class="paper-check">✓</span></span><span class="archive-card-text"><strong>CMR ${esc(r.num||noNum)}</strong><span>${stage}</span><small>${details}</small></span><span aria-hidden="true">›</span></button><div class="cmr-history-actions"><button type="button" onclick='saveArchiveToPhone(${id})' title="${archiveTr('Zapisz CMR w telefonie jako PDF')}" aria-label="${archiveTr('Zapisz CMR w telefonie jako PDF')} ${esc(r.num||noNum)}">📲</button><button type="button" class="cmr-history-trash" onclick='deleteRecord(${id})' title="${archiveTr('Usuń CMR z Historii')}" aria-label="${archiveTr('Usuń CMR z Historii')} ${esc(r.num||noNum)}">🗑</button></div></div>`;
+  return `<div class="cmr-history-row ${completed?'completed':''}"><button type="button" class="cmr-archive-card ${completed?'completed':''}" onclick='openArchive(${id})' aria-label="${archiveTr('Otwórz CMR')} ${esc(r.num||noNum)}: ${stage}"><span class="archive-paper" aria-hidden="true"><span class="paper-check">✓</span></span><span class="archive-card-text"><strong>CMR ${esc(r.num||noNum)}</strong><span>${stage}</span><small>${details}</small></span><span aria-hidden="true">›</span></button><div class="cmr-history-actions"><button type="button" onclick='saveArchiveToPhone(${id})' data-download-id="${esc(String(r.id))}" title="${archiveTr('Zapisz CMR w telefonie jako PDF')}" aria-label="${archiveTr('Zapisz CMR w telefonie jako PDF')} ${esc(r.num||noNum)}">📲</button><button type="button" class="cmr-history-trash" onclick='deleteRecord(${id})' title="${archiveTr('Usuń CMR z Historii')}" aria-label="${archiveTr('Usuń CMR z Historii')} ${esc(r.num||noNum)}">🗑</button></div></div>`;
  }).join(''):'<p class="hint">'+archiveTr('Nie ma jeszcze zapisanych dokumentów.')+'</p>';
 }
 function editLegacyRecord(id){const r=records().find(d=>d.id===id);if(!r||r.cmrStatus)return;setData(r);showTab('form');toast(archiveTr('Edytuj starszą CMR'))}
@@ -578,7 +700,7 @@ let photoURLs=[];
 async function renderPhotoArchive(){const box=el('photoArchive');if(!box)return;for(const u of photoURLs)URL.revokeObjectURL(u);photoURLs=[];try{const photos=await photoTransaction('readonly',s=>s.getAll());photos.sort((a,b)=>b.id-a.id);box.innerHTML='';if(!photos.length){box.textContent='Nie ma jeszcze zdjęć CMR.';return}for(const p of photos){const card=document.createElement('div');card.className='card';const img=document.createElement('img');img.className='cmr-photo-thumbnail';const url=URL.createObjectURL(p.blob);photoURLs.push(url);img.src=url;img.alt='Fotografia CMR '+p.number;img.onclick=()=>window.open(url,'_blank');const desc=document.createElement('div');const label=document.createElement('strong');label.textContent='CMR '+p.number;desc.append(label);const date=document.createElement('small');date.textContent=' '+new Date(p.created).toLocaleString();desc.append(date);const actions=document.createElement('div');actions.className='actions';const download=document.createElement('button');download.className='secondary';download.textContent='⬇ Pobierz zdjęcie';download.onclick=()=>{const a=document.createElement('a');a.href=url;a.download='CMR-'+String(p.number).replace(/[^a-zA-Z0-9_-]/g,'_')+'-'+p.id+'.'+(p.blob.type==='image/png'?'png':'jpg');a.click()};const del=document.createElement('button');del.className='danger';del.textContent='Usuń';del.onclick=async()=>{if(!confirm('Usunąć zdjęcie CMR '+p.number+'?'))return;await photoTransaction('readwrite',s=>s.delete(p.id));renderPhotoArchive()};actions.append(download,del);card.append(img,desc,actions);box.append(card)}}catch(e){box.textContent='Nie można otworzyć archiwum zdjęć na tym urządzeniu.'}}
 function locateForCMR(){if(!appPermissions().location){toast('Włącz lokalizację w Ustawienia → Uprawnienia');return}if(!navigator.geolocation){toast('GPS jest niedostępny');return}el('gpsResult').textContent='Pobieram lokalizację…';navigator.geolocation.getCurrentPosition(pos=>{const coords=pos.coords.latitude.toFixed(5)+', '+pos.coords.longitude.toFixed(5);el('gpsResult').textContent='📍 GPS: '+coords+' (dokładność ok. '+Math.round(pos.coords.accuracy)+' m). Nie wpisuję automatycznie do CMR.'},()=>{el('gpsResult').textContent='Brak dostępu do lokalizacji — sprawdź uprawnienia Androida.'},{enableHighAccuracy:false,timeout:12000,maximumAge:60000})}
 
-if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=89').then(r=>r.update()).catch(()=>{});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=90').then(r=>r.update()).catch(()=>{});
 
 // v7.7: GPS proposes sender (field 1) only, never changes loading/delivery.
 let gpsLoadingResults=[];
