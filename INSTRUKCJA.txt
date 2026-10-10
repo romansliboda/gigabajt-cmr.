@@ -1,1 +1,1 @@
-CMR 10.5 TEST: pomniejszony i cofnięty w obrębie ekranu telewizora obszar animacji śniegu, aby pozostała widoczna czarna ramka. Model GLB i inne funkcje CMR bez zmian.
+CMR 10.6 TEST. Poprawiono tylko położenie nakładki śniegu na TV: usunięto przekoszenie, nadano niewielki obrót przeciwny, zmniejszono, wycentrowano względem czarnego ekranu. Oryginalny model GLB 12 i pozostałe funkcje CMR bez zmian. Wgrać wszystkie pliki do katalogu głównego repozytorium.
