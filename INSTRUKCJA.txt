@@ -1,1 +1,1 @@
-Gigabajt CMR 10.4 TEST: poprawka położenia animacji śniegu tak, aby znajdowała się na czarnym ekranie telewizora. Model 3D 12, układ, historia i formularze bez zmian. Wgraj wszystkie pliki do katalogu głównego repozytorium, zatwierdź zmiany i otwórz link testowy z v=104.
+CMR 10.5 TEST: pomniejszony i cofnięty w obrębie ekranu telewizora obszar animacji śniegu, aby pozostała widoczna czarna ramka. Model GLB i inne funkcje CMR bez zmian.
