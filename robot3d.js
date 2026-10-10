@@ -27,38 +27,38 @@ function robot(t){
  const phase=t-modeStart,driving=mode==='drive',greeting=mode==='hello',working=mode==='work',watching=mode==='tv';
  // One real 3D character with articulated head, eyes, arms and wheels.
  const trip=(phase%9)/9, movingRight=Math.floor(phase/9)%2===0;
- const x=watching?-.35:working?-1.03:greeting?-.80: -1.65+(movingRight?trip:1-trip)*2.55;
- const yaw=watching?1.05:working?.48:greeting?-.04:(movingRight?1.45:-1.45);
+ const x=watching?-.65:working?-1.05:greeting?-.80: -1.75+(movingRight?trip:1-trip)*2.4;
+ const yaw=watching?.82:working?.38:greeting?-.04:(movingRight?1.3:-1.3);
  const bob=driving?.035*Math.sin(t*13):watching?-.12:.024*Math.sin(t*2.5);
  const base=mul(trans(x,bob,.22),ry(yaw));
  const neck=mul(base,trans(0,1.05,0));
  const head=mul(neck,mul(ry((watching?.17:0)+.14*Math.sin(t*.85)),rz((working?-.10:0)+.055*Math.sin(t*1.3))));
  // body, shoulder joints, forearms, spherical drive pods
- obj(sph,base,0,.57,0,.49,.56,.39,'white');
+ obj(sph,base,0,.60,0,.51,.52,.42,'white');
  obj(sph,base,0,.64,.37,.125,.135,.065,'blue',1);
  for(const side of [-1,1]){
-   obj(sph,base,side*.45,.75,0,.18,.19,.18,'side');
-   obj(sph,base,side*.52,.62,.03,.16,.22,.16,'white');
-   obj(sph,base,side*.52,.38,.14,.14,.16,.15,'side',0,side*.18+Math.sin(t*2+side)*.08);
-   obj(sph,base,side*.27,.22,.03,.29,.27,.30,'white');
+   obj(sph,base,side*.43,.77,0,.155,.17,.16,'side');
+   obj(sph,base,side*.51,.59,.10,.16,.24,.18,'white');
+   obj(sph,base,side*.51,.38,.18,.14,.15,.14,'side',0,side*.18+Math.sin(t*2+side)*.08);
+   obj(sph,base,side*.28,.21,.03,.29,.25,.29,'white');
    obj(sph,base,side*.27,.17,.29,.22,.20,.12,'side');
    obj(sph,base,side*.27,.17,.40,.16,.15,.042,'blue',1);
  }
  // large rounded head and glossy black curved display
- obj(sph,head,0,.09,0,.81,.62,.59,'white');
- obj(sph,head,0,.04,.49,.65,.48,.23,'black');
+ obj(sph,head,0,.10,0,.86,.69,.62,'white');
+ obj(sph,head,0,.04,.525,.73,.52,.245,'black');
  // eyes are on display, blink periodically, glance gently toward TV
  const blinkPhase=t%5.9;
  const blink=blinkPhase>5.64?Math.max(.08,Math.abs(blinkPhase-5.77)*8):1;
  const glance=watching?.03*Math.sin(t*1.1):0;
  for(const side of [-1,1]){
-   obj(sph,head,side*.28+glance,.075,.704,.115,.105*blink,.025,'blue',1);
-   obj(sph,head,side*.28+glance,.084,.730,.040,.052*blink,.018,'black');
+   obj(sph,head,side*.29+glance,.075,.757,.137,.145*blink,.043,'blue',1);
+   obj(sph,head,side*.29+glance-.045,.119,.799,.033,.038*blink,.010,'paper',1);
  }
- obj(sph,head,0,-.17,.69,.155,.029,.018,'blue',1);
+ obj(sph,head,0,-.205,.748,.125,.022,.025,'blue',1);
  for(const side of [-1,1]){
-   obj(sph,head,side*.80,.07,-.02,.15,.235,.23,'side');
-   obj(sph,head,side*.835,.07,.09,.075,.16,.095,'blue',1);
+   obj(sph,head,side*.83,.07,-.02,.18,.24,.24,'side');
+   obj(sph,head,side*.865,.07,.12,.095,.17,.10,'blue',1);
  }
  obj(sph,head,0,.71,0,.055,.17,.055,'side');
  obj(sph,head,0,.87,0,.105,.11,.105,'blue',1);
@@ -79,7 +79,8 @@ function scenery(t){
  obj(sph,I,-.36,-.245,.16,.62,.036,.38,'gray');
  // separate retro TV with convex screen, knobs, legs and illuminated program
  obj(box,I,1.44,.46,-.12,.69,.59,.43,'orange');
- obj(box,I,1.37,.49,.34,.52,.43,.047,'side');
+ obj(sph,I,1.44,.46,-.12,.74,.60,.42,'orange');
+ obj(box,I,1.37,.49,.34,.54,.44,.048,'side');
  obj(sph,I,1.35,.49,.392,.44,.36,.039,'dark');
  if(mode==='tv'&&!tvBroken){
    obj(sph,I,1.35,.49,.423,.38,.30,.015,'screen',1);
@@ -98,7 +99,7 @@ function scenery(t){
  if(weather==='sun'&&mode==='hello')obj(sph,I,-1.90,2.48,-.28,.22,.22,.12,'sun',1);
 }
 
-function resize(){const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);canvas.width=Math.round(w*dpi);canvas.height=Math.round(h*dpi);gl.viewport(0,0,canvas.width,canvas.height);projection=perspective(Math.PI/3.35,w/h,.1,100);view=lookAt([0,1.30,5.45],[0,.87,0])}
+function resize(){const dpi=Math.min(devicePixelRatio||1,2),w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);canvas.width=Math.round(w*dpi);canvas.height=Math.round(h*dpi);gl.viewport(0,0,canvas.width,canvas.height);projection=perspective(Math.PI/3.35,w/h,.1,100);view=lookAt([0,1.43,5.0],[0,.95,0])}
 function setMode(m){mode=m;modeStart=elapsed;label.textContent={tv:'Ogląda telewizor — ekran jest włączony',drive:'Jeździ bokiem i obraca się',work:'Czyta i wypełnia CMR',hello:'Cześć! Co słychać?'}[m];bubble.classList.toggle('on',m==='hello');bubble.textContent=weather==='rain'?'Cześć! Dziś pada, około 10°C 🌧️':'Cześć! Dziś słonecznie, około 27°C ☀️';returnAt=m==='hello'?elapsed+6.5:0}
 for(let [id,m] of Object.entries({tv:'tv',drive:'drive',cmr:'work',hello:'hello'}))document.getElementById(id).onclick=()=>setMode(m);
 document.getElementById('rain').onclick=()=>{weather='rain';temperature=10;setMode('hello')};document.getElementById('sun').onclick=()=>{weather='sun';temperature=27;setMode('hello')};
