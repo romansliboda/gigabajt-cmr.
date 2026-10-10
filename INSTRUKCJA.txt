@@ -1,16 +1,10 @@
-GIGABAJT ROBOT 06 — TEST
+GIGABAJT MODEL 3D 12 — TEST GITHUB PAGES
 
 1. Rozpakuj ZIP.
-2. Otwórz folder Gigabajt_robot_06.
-3. Wgraj na GitHub do głównego katalogu repozytorium jego 5 plików:
-   index.html, app.js, style.css, glowa.png, telewizor.png.
-4. Po zatwierdzeniu zmian otwórz:
-   https://romansliboda.github.io/gigabajt-cmr./index.html?v=robot06
+2. Wgraj pliki index.html, Gigabajt_glowa_i_telewizor_12.glb i INSTRUKCJA.txt do katalogu glownego repozytorium.
+3. Zatwierdz zmiany (Commit changes).
+4. Otworz https://romansliboda.github.io/gigabajt-cmr./index.html?v=robot12
 
-UWAGA: To osobne demo — jego index.html zastąpi stronę aplikacji CMR,
-jesli wgrasz go w katalogu głównym. Nie kasuje zapisanych danych CMR.
-Aby zachować aplikację CMR, możesz wgrać te pliki do podfolderu robot06,
-a potem otworzyć: https://romansliboda.github.io/gigabajt-cmr./robot06/index.html
+UWAGA: To osobny podglad 3D, nie cala aplikacja CMR. Wgranie index.html do glownego katalogu zastapi widoczna strone aplikacji CMR, dopoki nie przywrocisz poprzedniego index.html.
 
-Robot 06 to animacja 2.5D z oddzielnymi grafikami glowy i telewizora,
-a nie obracalny model geometryczny 3D. Ruch jest rzeczywisty na stronie.
+Podglad dziala bez polaczenia z zewnetrznymi serwisami: biblioteka Plotly jest wbudowana w index.html. Model GLB dolaczony oddzielnie.
