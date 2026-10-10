@@ -1,4 +1,1 @@
-CMR 10.2 TEST — zmieniono wyłącznie scenę 3D i jej opis.
-Sceny nie można obracać palcem (stała kamera); ekran telewizora po 1,4 s pokazuje ruchomy czarno-biały śnieg.
-Model GLB 12 i funkcje formularzy CMR zachowane bez zmian.
-Rozpakuj archiwum i wgraj wszystkie pliki do głównego katalogu GitHub Pages.
+CMR 10.3 TEST — naprawa pustego widoku. Scena pochodzi ze sprawdzonej wersji 10.1. Zablokowany dotyk; animowany śnieg rysowany lekko przez canvas (bez dodatkowych obiektów WebGL). Model 12 bez zmian. Formularze i historia CMR zachowane.
