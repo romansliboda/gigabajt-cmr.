@@ -1,1 +1,1 @@
-Gigabajt CMR 10.8 TEST. Poprawa wyłącznie położenia czarno-białego śniegu: górna krawędź podniesiona, dolna krawędź podniesiona, lewa krawędź lekko uniesiona obrotem +3°. Bez zmian modelu 3D i formularzy CMR. Rozpakuj ZIP i wgraj 7 plików bezpośrednio do głównego katalogu repozytorium GitHub (bez nadrzędnego folderu).
+Gigabajt CMR 10.9 TEST: głowa robota płynnie lewituje i przesuwa się przy nieruchomym TV. Sprawdzić zachowanie na telefonie. Rozpakuj i wgraj 7 plików do katalogu głównego GitHub Pages. Pozostałe funkcje CMR i model 12 bez zmian.

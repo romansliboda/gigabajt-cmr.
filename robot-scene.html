@@ -3913,4 +3913,45 @@ body{margin:0;overflow:hidden}
   // Uruchom dopiero po wczytaniu podglądu; bez ingerencji w Plotly.
   setTimeout(()=>{noise();setInterval(noise,145)},1800);
 })();
-</script></body></html>
+</script>
+<script>
+(function(){
+  // Gigabajt 10.9 — tylko biała głowa, TV zostaje nieruchomy.
+  // Jeden lekki ruch co ~350 ms zamiast ponownego renderowania całej sceny w 60 FPS.
+  const plot=document.querySelector('.js-plotly-plot');
+  if(!plot)return;
+  const belongsToRobot=(name)=> /^(Biala_obudowa_glowy|Obramowanie_czarne|Blyszczacy_wyswietlacz|Szklo_polysk_gora|Oko_|Gniazdo_|Zloty_panel_|Czarny_panel_gorny|Glowica_)/.test(name||'');
+  let ready=false,base=[],ids=[],running=false;
+  function start(){
+    if(ready||!plot.data||!window.Plotly)return;
+    ids=plot.data.map((tr,i)=>belongsToRobot(tr.name)?i:-1).filter(i=>i>=0);
+    if(ids.length<8)return;
+    base=ids.map(i=>{
+      const tr=plot.data[i];
+      return {x:Array.from(tr.x),y:Array.from(tr.y),z:Array.from(tr.z)};
+    });
+    ready=true;
+  }
+  const startAt=performance.now();
+  setInterval(()=>{
+    if(document.hidden||running)return;
+    if(!ready)start();
+    if(!ready)return;
+    const t=(performance.now()-startAt)/1000;
+    // Własny spokojny tor; telewizor zaczyna się daleko poza x=2, więc bez kolizji.
+    const dx=0.18*Math.sin(t*0.63)+0.045*Math.sin(t*0.25);
+    const dy=0.12*Math.sin(t*0.47);
+    const dz=0.055*Math.sin(t*2.0);
+    const xs=[],ys=[],zs=[];
+    for(const b of base){
+      xs.push(b.x.map(v=>v+dx));
+      ys.push(b.y.map(v=>v+dy));
+      zs.push(b.z.map(v=>v+dz));
+    }
+    running=true;
+    Promise.resolve(Plotly.restyle(plot,{x:xs,y:ys,z:zs},ids))
+       .catch(()=>{}).finally(()=>{running=false});
+  },360);
+})();
+</script>
+</body></html>
