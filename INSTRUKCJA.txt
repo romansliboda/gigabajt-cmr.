@@ -1,1 +1,8 @@
-Gigabajt CMR 10.9 TEST: głowa robota płynnie lewituje i przesuwa się przy nieruchomym TV. Sprawdzić zachowanie na telefonie. Rozpakuj i wgraj 7 plików do katalogu głównego GitHub Pages. Pozostałe funkcje CMR i model 12 bez zmian.
+Gigabajt CMR 11.0 — pusty kafelek
+
+W zakładce Podgląd usunięto scenę 3D, robota i telewizor. Pozostawiono pusty, niższy kafelek (108 px) na przyszłe funkcje.
+
+Pozostały kod CMR przeniesiono z wersji 10.9 bez ingerowania w funkcje formularzy, historii i PDF.
+
+Rozpakuj ZIP i wgraj zawarte pliki do katalogu głównego repozytorium GitHub.
+Przed podmianą zachowaj kopię obecnych plików. Nie czyść danych aplikacji ani pamięci witryny.
