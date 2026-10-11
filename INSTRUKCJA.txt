@@ -1,4 +1,1 @@
-Gigabajt CMR 10.7 TEST — poprawiono wyłącznie nakładkę śniegu TV w robot-scene.html.
-Śnieg węższy/niższy, przesunięty bliżej środka czarnego ekranu i obrócony o -2°.
-Model 3D 12 i pozostałe pliki aplikacji niezmienione względem 10.6.
-Wgraj zawartość ZIP do głównego katalogu repozytorium GitHub.
+Gigabajt CMR 10.8 TEST. Poprawa wyłącznie położenia czarno-białego śniegu: górna krawędź podniesiona, dolna krawędź podniesiona, lewa krawędź lekko uniesiona obrotem +3°. Bez zmian modelu 3D i formularzy CMR. Rozpakuj ZIP i wgraj 7 plików bezpośrednio do głównego katalogu repozytorium GitHub (bez nadrzędnego folderu).
