@@ -1,18 +1,11 @@
-GIGABAJT CMR — 11.1 TEST + KALENDARZ KIEROWCY V23
+GIGABAJT CMR 11.3 — bez pierwszej pustej białej ramki.
 
-Gotowa paczka do WGRANIA NA GITHUB po rozpakowaniu ZIP.
+ZMIANA: wyłącznie usunięcie pustego panelu nad kalendarzem w zakładce Podgląd. Kalendarz, podgląd druku CMR i reszta aplikacji bez zmian poza numerem wersji oraz odświeżeniem iframe.
 
-BAZA: ostatnia dostępna w historii rozmów pełna paczka CMR 11.0 (pusty kafelek).
-Nie potwierdzono, czy jest identyczna z obecną zawartością repozytorium main.
-Jeśli na GitHub masz nowsze zmiany niż w tej paczce, ich nadpisanie może je usunąć.
+1. Rozpakuj ZIP.
+2. Otwórz https://github.com/romansliboda/gigabajt-cmr./upload/main
+3. Wgraj zawartość ZIP (pliki luzem, nie sam ZIP), zatwierdź Commit changes.
+4. Otwórz https://romansliboda.github.io/gigabajt-cmr./index.html?v=113
+5. Wybierz Podgląd: u góry powinien być od razu Podgląd druku CMR z kalendarzem, bez pustej ramki.
 
-KROKI:
-1. Dla bezpieczeństwa pobierz kopię aktualnej zawartości repozytorium (Code > Download ZIP).
-2. Rozpakuj tę paczkę na telefonie.
-3. Wejdź: https://github.com/romansliboda/gigabajt-cmr./upload/main
-4. Wybierz WSZYSTKIE pliki z rozpakowanej paczki (nie ZIP). Wgraj do katalogu głównego repozytorium i zatwierdź (Commit changes).
-5. Sprawdź: https://romansliboda.github.io/gigabajt-cmr./index.html?v=111
-6. Kliknij Podgląd, powinien być kalendarz nad dotychczasowym Podglądem druku CMR.
-
-UWAGA: zapis kalendarza korzysta z localStorage tego telefonu. Nie czyść danych tej witryny.
-To prototyp; nie zastępuje tachografu.
+UWAGA: paczka bazuje na lokalnym CMR 11.2, a nie na świeżo pobranym GitHub main. Jeśli repozytorium miało inne późniejsze aktualizacje, mogą zostać nadpisane. Zrób kopię bieżących plików przed podmianą.
