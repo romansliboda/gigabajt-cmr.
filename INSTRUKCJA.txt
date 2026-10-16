@@ -1,11 +1,14 @@
-GIGABAJT CMR 11.3 — bez pierwszej pustej białej ramki.
+GIGABAJT CMR 11.4 — KOMPAKTOWY KALENDARZ
 
-ZMIANA: wyłącznie usunięcie pustego panelu nad kalendarzem w zakładce Podgląd. Kalendarz, podgląd druku CMR i reszta aplikacji bez zmian poza numerem wersji oraz odświeżeniem iframe.
+Wersja na podstawie działającej 11.3.
+Zmiana: mniejsze kratki kalendarza (48 zamiast 65 px), mniejsze odstępy, automatyczne dopasowanie wysokości ramki kalendarza w zakładce Podgląd.
+Bez zmian w ikonach, funkcjach CMR, zapisywaniu czasu, alarmach i zestawieniu.
 
 1. Rozpakuj ZIP.
-2. Otwórz https://github.com/romansliboda/gigabajt-cmr./upload/main
-3. Wgraj zawartość ZIP (pliki luzem, nie sam ZIP), zatwierdź Commit changes.
-4. Otwórz https://romansliboda.github.io/gigabajt-cmr./index.html?v=113
-5. Wybierz Podgląd: u góry powinien być od razu Podgląd druku CMR z kalendarzem, bez pustej ramki.
+2. Prześlij WSZYSTKIE pliki ze środka (nie sam ZIP) do repozytorium GitHub:
+https://github.com/romansliboda/gigabajt-cmr./upload/main
+3. Zatwierdź Commit changes.
+4. Otwórz:
+https://romansliboda.github.io/gigabajt-cmr./index.html?v=114
 
-UWAGA: paczka bazuje na lokalnym CMR 11.2, a nie na świeżo pobranym GitHub main. Jeśli repozytorium miało inne późniejsze aktualizacje, mogą zostać nadpisane. Zrób kopię bieżących plików przed podmianą.
+UWAGA: Dane zapisane w localStorage kalendarza używają tego samego klucza v23. Nie czyść danych przeglądarki.
