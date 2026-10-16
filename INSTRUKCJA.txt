@@ -1,8 +1,18 @@
-Gigabajt CMR 11.0 — pusty kafelek
+GIGABAJT CMR — 11.1 TEST + KALENDARZ KIEROWCY V23
 
-W zakładce Podgląd usunięto scenę 3D, robota i telewizor. Pozostawiono pusty, niższy kafelek (108 px) na przyszłe funkcje.
+Gotowa paczka do WGRANIA NA GITHUB po rozpakowaniu ZIP.
 
-Pozostały kod CMR przeniesiono z wersji 10.9 bez ingerowania w funkcje formularzy, historii i PDF.
+BAZA: ostatnia dostępna w historii rozmów pełna paczka CMR 11.0 (pusty kafelek).
+Nie potwierdzono, czy jest identyczna z obecną zawartością repozytorium main.
+Jeśli na GitHub masz nowsze zmiany niż w tej paczce, ich nadpisanie może je usunąć.
 
-Rozpakuj ZIP i wgraj zawarte pliki do katalogu głównego repozytorium GitHub.
-Przed podmianą zachowaj kopię obecnych plików. Nie czyść danych aplikacji ani pamięci witryny.
+KROKI:
+1. Dla bezpieczeństwa pobierz kopię aktualnej zawartości repozytorium (Code > Download ZIP).
+2. Rozpakuj tę paczkę na telefonie.
+3. Wejdź: https://github.com/romansliboda/gigabajt-cmr./upload/main
+4. Wybierz WSZYSTKIE pliki z rozpakowanej paczki (nie ZIP). Wgraj do katalogu głównego repozytorium i zatwierdź (Commit changes).
+5. Sprawdź: https://romansliboda.github.io/gigabajt-cmr./index.html?v=111
+6. Kliknij Podgląd, powinien być kalendarz nad dotychczasowym Podglądem druku CMR.
+
+UWAGA: zapis kalendarza korzysta z localStorage tego telefonu. Nie czyść danych tej witryny.
+To prototyp; nie zastępuje tachografu.
