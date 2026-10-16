@@ -1,4 +1,4 @@
-GIGABAJT CMR 11.5 — JĘZYKI KALENDARZA
+GIGABAJT CMR 11.6 — HISTORIA ZMIAN
 Rozpakuj ZIP i wgraj WSZYSTKIE pliki do głównego katalogu repozytorium GitHub (zastąp stare index.html i kalendarz-kierowcy.html).
 Kalendarz ma teraz 10 języków jak aplikacja: pl, en, de, fr, es, it, pt, nl, cs, uk.
 Zachowano grafikę, logikę oraz lokalnie zapisane dane kalendarza.
