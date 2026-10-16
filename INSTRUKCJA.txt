@@ -1,14 +1,5 @@
-GIGABAJT CMR 11.4 — KOMPAKTOWY KALENDARZ
-
-Wersja na podstawie działającej 11.3.
-Zmiana: mniejsze kratki kalendarza (48 zamiast 65 px), mniejsze odstępy, automatyczne dopasowanie wysokości ramki kalendarza w zakładce Podgląd.
-Bez zmian w ikonach, funkcjach CMR, zapisywaniu czasu, alarmach i zestawieniu.
-
-1. Rozpakuj ZIP.
-2. Prześlij WSZYSTKIE pliki ze środka (nie sam ZIP) do repozytorium GitHub:
-https://github.com/romansliboda/gigabajt-cmr./upload/main
-3. Zatwierdź Commit changes.
-4. Otwórz:
-https://romansliboda.github.io/gigabajt-cmr./index.html?v=114
-
-UWAGA: Dane zapisane w localStorage kalendarza używają tego samego klucza v23. Nie czyść danych przeglądarki.
+GIGABAJT CMR 11.5 — JĘZYKI KALENDARZA
+Rozpakuj ZIP i wgraj WSZYSTKIE pliki do głównego katalogu repozytorium GitHub (zastąp stare index.html i kalendarz-kierowcy.html).
+Kalendarz ma teraz 10 języków jak aplikacja: pl, en, de, fr, es, it, pt, nl, cs, uk.
+Zachowano grafikę, logikę oraz lokalnie zapisane dane kalendarza.
+Po wgraniu otwórz index.html?v=115.
