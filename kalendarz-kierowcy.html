@@ -139,7 +139,7 @@ function alerts(k,r){
  out.nineRemaining=Math.max(0,3-out.nineUsed-(out.nineCurrent?1:0));
  out.nineLimit=out.nineUsed>=3;
  if(out.nineCurrent&&out.nineLimit)out.hard.push('Czwarta skrócona pauza dobowa — trzy dziewiątki już wykorzystane.');
- if(duration>15&&r.three!==true)out.hard.push('Dniówka ponad 15 godzin: nie da się zmieścić 9 godzin odpoczynku w okresie 24 h.');
+ if(duration>15)out.hard.push('UWAGA! Przekroczyłeś 15 godzin pracy! Wysokie ryzyko naruszenia przepisów i otrzymania wysokiego mandatu!');
  if(g!==null&&g>=0&&g<540)out.hard.push('! ODPOCZYNEK NIEZALICZONY: poniżej 9 godzin. UWAGA — ryzyko wysokiego mandatu. Sprawdź dane tachografu i obowiązujące wyjątki.');
  out.short=g!==null&&g>=0&&g<540;
  return out;
