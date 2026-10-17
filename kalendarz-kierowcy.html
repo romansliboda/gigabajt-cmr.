@@ -232,7 +232,7 @@ function settings(){V.innerHTML=`<button class="nav" id="back">← Kalendarz</bu
 calendar();
 // Dostosuj wysokość ramki do aktualnego widoku, także po wejściu w szczegóły.
 function reportHeight(){
-  const h=Math.ceil(Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,V.getBoundingClientRect().bottom))+6;
+  const h=Math.ceil(V.getBoundingClientRect().bottom)+6;
   window.parent.postMessage({type:'gigabajt-calendar-height',height:h},window.location.origin);
 }
 if(typeof ResizeObserver!=='undefined')new ResizeObserver(reportHeight).observe(V);
